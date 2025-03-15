@@ -1,6 +1,6 @@
 {
   "name": "codetie",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "A CLI for building interactive 3D web apps with optional agile-lite workflow management.",
   "type": "module",
   "main": "dist/index.mjs",
@@ -9,6 +9,7 @@
   },
   "files": [
     "dist",
+    "template",
     "index.js"
   ],
   "repository": {
@@ -18,7 +19,9 @@
   "scripts": {
     "build": "unbuild",
     "dev": "unbuild --stub",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "release": "npm publish",
+    "release:alpha": "npm publish --tag alpha"
   },
   "keywords": [
     "3d",

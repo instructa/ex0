@@ -7,6 +7,10 @@
 
 **codetie** - A CLI tool for managing AI-powered IDE configurations and rules.
 
+
+**ATTENTION:** This is brand new. untested and under heavy dev! ❗❗❗
+
+
 ---
 
 ## Features

@@ -1,0 +1,2873 @@
+This file is a merged representation of a subset of the codebase, containing specifically included files and files not matching ignore patterns, combined into a single document by Repomix. The content has been processed where empty lines have been removed.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Only files matching these patterns are included: **/*, .cursorrules, .cursor/rules/*, .cursor/**
+- Files matching these patterns are excluded: **/.!(cursor)/**, **/*.pbxproj, **/node_modules/**, **/dist/**, **/build/**, **/compile/**, **/*.spec.*, **/*.pyc, **/.env, **/.env.*, **/*.env, **/*.env.*, **/*.lock, **/*.lockb, **/package-lock.*, **/pnpm-lock.*, **/*.tsbuildinfo
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Empty lines have been removed from all files
+</notes>
+
+<additional_info>
+
+</additional_info>
+
+</file_summary>
+
+<directory_structure>
+.cursor/
+  rules/
+    cursor-tools.mdc
+docs/
+  codetie-docs/
+    app/
+      components/
+        OgImage/
+          OgImageDocs.vue
+        AppFooter.vue
+        AppHeader.vue
+      layouts/
+        docs.vue
+      pages/
+        [...slug].vue
+        index.vue
+      app.config.ts
+      app.vue
+      error.vue
+    content/
+      1.getting-started/
+        _dir.yml
+        installation.md
+        introduction.md
+        usage.md
+      index.yml
+    server/
+      api/
+        search.json.get.ts
+      tsconfig.json
+    eslint.config.mjs
+    nuxt.config.ts
+    nuxt.schema.ts
+    package.json
+    README.md
+    renovate.json
+    tailwind.config.ts
+    tsconfig.json
+packages/
+  codetie/
+    src/
+      commands/
+        _shared.ts
+        add.ts
+        create.ts
+        init.ts
+      utils/
+        logger.ts
+      index.ts
+      main.ts
+      utils.ts
+    build.config.ts
+    index.js
+    package.json
+    README.md
+    tsconfig.json
+scripts/
+  release.ts
+templates/
+  codetie-init/
+    .cursor/
+      rules/
+        modes/
+          impl-agent.mdc
+          plan.mdc
+        001-base.mdc
+  starter/
+    base-starter/
+      README.md.mustache
+CONTRIBUTE.md
+LICENSE
+package.json
+pnpm-workspace.yaml
+README.md
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".cursor/rules/cursor-tools.mdc">
+---
+description: Global Rule. This rule should ALWAYS be loaded.
+globs: *,**/*
+alwaysApply: true
+---
+cursor-tools is a CLI tool that allows you to interact with AI models and other tools.
+cursor-tools is installed on this machine and it is available to you to execute. You're encouraged to use it.
+
+<cursor-tools Integration>
+# Instructions
+Use the following commands to get AI assistance:
+
+**Direct Model Queries:**
+`cursor-tools ask "<your question>" --provider <provider> --model <model>` - Ask any model from any provider a direct question (e.g., `cursor-tools ask "What is the capital of France?" --provider openai --model o3-mini`). Note that this command is generally less useful than other commands like `repo` or `plan` because it does not include any context from your codebase or repository.
+
+**Implementation Planning:**
+`cursor-tools plan "<query>"` - Generate a focused implementation plan using AI (e.g., `cursor-tools plan "Add user authentication to the login page"`)
+The plan command uses multiple AI models to:
+1. Identify relevant files in your codebase (using Gemini by default)
+2. Extract content from those files
+3. Generate a detailed implementation plan (using OpenAI o3-mini by default)
+
+**Plan Command Options:**
+--fileProvider=<provider>: Provider for file identification (gemini, openai, anthropic, perplexity, modelbox, or openrouter)
+--thinkingProvider=<provider>: Provider for plan generation (gemini, openai, anthropic, perplexity, modelbox, or openrouter)
+--fileModel=<model>: Model to use for file identification
+--thinkingModel=<model>: Model to use for plan generation
+--debug: Show detailed error information
+
+**Web Search:**
+`cursor-tools web "<your question>"` - Get answers from the web using a provider that supports web search (e.g., Perplexity models and Gemini Models either directly or from OpenRouter or ModelBox) (e.g., `cursor-tools web "latest shadcn/ui installation instructions"`)
+when using web for complex queries suggest writing the output to a file somewhere like local-research/<query summary>.md.
+
+**Web Command Options:**
+--provider=<provider>: AI provider to use (perplexity, gemini, modelbox, or openrouter)
+--model=<model>: Model to use for web search (model name depends on provider)
+--max-tokens=<number>: Maximum tokens for response
+
+**Repository Context:**
+`cursor-tools repo "<your question>" [--subdir=<path>]` - Get context-aware answers about this repository using Google Gemini (e.g., `cursor-tools repo "explain authentication flow"`). Use the optional `--subdir` parameter to analyze a specific subdirectory instead of the entire repository (e.g., `cursor-tools repo "explain the code structure" --subdir=src/components`)
+
+**Documentation Generation:**
+`cursor-tools doc [options]` - Generate comprehensive documentation for this repository (e.g., `cursor-tools doc --output docs.md`)
+when using doc for remote repos suggest writing the output to a file somewhere like local-docs/<repo-name>.md.
+
+**GitHub Information:**
+`cursor-tools github pr [number]` - Get the last 10 PRs, or a specific PR by number (e.g., `cursor-tools github pr 123`)
+`cursor-tools github issue [number]` - Get the last 10 issues, or a specific issue by number (e.g., `cursor-tools github issue 456`)
+
+**ClickUp Information:**
+`cursor-tools clickup task <task_id>` - Get detailed information about a ClickUp task including description, comments, status, assignees, and metadata (e.g., `cursor-tools clickup task "task_id"`)
+
+**Model Context Protocol (MCP) Commands:**
+Use the following commands to interact with MCP servers and their specialized tools:
+`cursor-tools mcp search "<query>"` - Search the MCP Marketplace for available servers that match your needs (e.g., `cursor-tools mcp search "git repository management"`)
+`cursor-tools mcp run "<query>"` - Execute MCP server tools using natural language queries (e.g., `cursor-tools mcp run "list files in the current directory" --provider=openrouter`). The query must include sufficient information for cursor-tools to determine which server to use, provide plenty of context.
+
+The `search` command helps you discover servers in the MCP Marketplace based on their capabilities and your requirements. The `run` command automatically selects and executes appropriate tools from these servers based on your natural language queries. If you want to use a specific server include the server name in your query. E.g. `cursor-tools mcp run "using the mcp-server-sqlite list files in directory --provider=openrouter"`
+
+**Notes on MCP Commands:**
+- MCP commands require `ANTHROPIC_API_KEY` or `OPENROUTER_API_KEY` to be set in your environment
+- By default the `mcp` command uses Anthropic, but takes a --provider argument that can be set to 'anthropic' or 'openrouter'
+- Results are streamed in real-time for immediate feedback
+- Tool calls are automatically cached to prevent redundant operations
+- Often the MCP server will not be able to run because environment variables are not set. If this happens ask the user to add the missing environment variables to the cursor tools env file at ~/.cursor-tools/.env
+
+**Stagehand Browser Automation:**
+`cursor-tools browser open <url> [options]` - Open a URL and capture page content, console logs, and network activity (e.g., `cursor-tools browser open "https://example.com" --html`)
+`cursor-tools browser act "<instruction>" --url=<url | 'current'> [options]` - Execute actions on a webpage using natural language instructions (e.g., `cursor-tools browser act "Click Login" --url=https://example.com`)
+`cursor-tools browser observe "<instruction>" --url=<url> [options]` - Observe interactive elements on a webpage and suggest possible actions (e.g., `cursor-tools browser observe "interactive elements" --url=https://example.com`)
+`cursor-tools browser extract "<instruction>" --url=<url> [options]` - Extract data from a webpage based on natural language instructions (e.g., `cursor-tools browser extract "product names" --url=https://example.com/products`)
+
+**Notes on Browser Commands:**
+- All browser commands are stateless unless --connect-to is used to connect to a long-lived interactive session. In disconnected mode each command starts with a fresh browser instance and closes it when done.
+- When using `--connect-to`, special URL values are supported:
+  - `current`: Use the existing page without reloading
+  - `reload-current`: Use the existing page and refresh it (useful in development)
+  - If working interactively with a user you should always use --url=current unless you specifically want to navigate to a different page. Setting the url to anything else will cause a page refresh loosing current state.
+- Multi step workflows involving state or combining multiple actions are supported in the `act` command using the pipe (|) separator (e.g., `cursor-tools browser act "Click Login | Type 'user@example.com' into email | Click Submit" --url=https://example.com`)
+- Video recording is available for all browser commands using the `--video=<directory>` option. This will save a video of the entire browser interaction at 1280x720 resolution. The video file will be saved in the specified directory with a timestamp.
+- DO NOT ask browser act to "wait" for anything, the wait command is currently disabled in Stagehand.
+
+**Tool Recommendations:**
+- `cursor-tools web` is best for general web information not specific to the repository. Generally call this without additional arguments.
+- `cursor-tools repo` is ideal for repository-specific questions, planning, code review and debugging. E.g. `cursor-tools repo "Review recent changes to command error handling looking for mistakes, omissions and improvements"`. Generally call this without additional arguments.
+- `cursor-tools plan` is ideal for planning tasks. E.g. `cursor-tools plan "Adding authentication with social login using Google and Github"`. Generally call this without additional arguments.
+- `cursor-tools doc` generates documentation for local or remote repositories.
+- `cursor-tools browser` is useful for testing and debugging web apps and uses Stagehand
+- `cursor-tools mcp` enables interaction with specialized tools through MCP servers (e.g., for Git operations, file system tasks, or custom tools)
+
+**Running Commands:**
+1. Use `cursor-tools <command>` to execute commands (make sure cursor-tools is installed globally using npm install -g cursor-tools so that it is in your PATH)
+
+**General Command Options (Supported by all commands):**
+--provider=<provider>: AI provider to use (openai, anthropic, perplexity, gemini, or openrouter). If provider is not specified, the default provider for that task will be used.
+--model=<model name>: Specify an alternative AI model to use. If model is not specified, the provider's default model for that task will be used.
+--max-tokens=<number>: Control response length
+--save-to=<file path>: Save command output to a file (in *addition* to displaying it)
+--help: View all available options (help is not fully implemented yet)
+
+**Repository Command Options:**
+--provider=<provider>: AI provider to use (gemini, openai, openrouter, perplexity, or modelbox)
+--model=<model>: Model to use for repository analysis
+--max-tokens=<number>: Maximum tokens for response
+
+**Documentation Command Options:**
+--from-github=<GitHub username>/<repository name>[@<branch>]: Generate documentation for a remote GitHub repository
+--provider=<provider>: AI provider to use (gemini, openai, openrouter, perplexity, or modelbox)
+--model=<model>: Model to use for documentation generation
+--max-tokens=<number>: Maximum tokens for response
+
+**GitHub Command Options:**
+--from-github=<GitHub username>/<repository name>[@<branch>]: Access PRs/issues from a specific GitHub repository
+
+**Browser Command Options (for 'open', 'act', 'observe', 'extract'):**
+--console: Capture browser console logs (enabled by default, use --no-console to disable)
+--html: Capture page HTML content (disabled by default)
+--network: Capture network activity (enabled by default, use --no-network to disable)
+--screenshot=<file path>: Save a screenshot of the page
+--timeout=<milliseconds>: Set navigation timeout (default: 120000ms for Stagehand operations, 30000ms for navigation)
+--viewport=<width>x<height>: Set viewport size (e.g., 1280x720). When using --connect-to, viewport is only changed if this option is explicitly provided
+--headless: Run browser in headless mode (default: true)
+--no-headless: Show browser UI (non-headless mode) for debugging
+--connect-to=<port>: Connect to existing Chrome instance. Special values: 'current' (use existing page), 'reload-current' (refresh existing page)
+--wait=<time:duration or selector:css-selector>: Wait after page load (e.g., 'time:5s', 'selector:#element-id')
+--video=<directory>: Save a video recording (1280x720 resolution, timestamped subdirectory). Not available when using --connect-to
+--url=<url>: Required for `act`, `observe`, and `extract` commands. Url to navigate to before the main command or one of the special values 'current' (to stay on the current page without navigating or reloading) or 'reload-current' (to reload the current page)
+--evaluate=<string>: JavaScript code to execute in the browser before the main command
+
+**Nicknames**
+Users can ask for these tools using nicknames
+Gemini is a nickname for cursor-tools repo
+Perplexity is a nickname for cursor-tools web
+Stagehand is a nickname for cursor-tools browser
+
+**Xcode Commands:**
+`cursor-tools xcode build [buildPath=<path>] [destination=<destination>]` - Build Xcode project and report errors.
+**Build Command Options:**
+--buildPath=<path>: (Optional) Specifies a custom directory for derived build data. Defaults to ./.build/DerivedData.
+--destination=<destination>: (Optional) Specifies the destination for building the app (e.g., 'platform=iOS Simulator,name=iPhone 16 Pro'). Defaults to 'platform=iOS Simulator,name=iPhone 16 Pro'.
+
+`cursor-tools xcode run [destination=<destination>]` - Build and run the Xcode project on a simulator.
+**Run Command Options:**
+--destination=<destination>: (Optional) Specifies the destination simulator (e.g., 'platform=iOS Simulator,name=iPhone 16 Pro'). Defaults to 'platform=iOS Simulator,name=iPhone 16 Pro'.
+
+`cursor-tools xcode lint` - Run static analysis on the Xcode project to find and fix issues.
+
+**Additional Notes:**
+- For detailed information, see `node_modules/cursor-tools/README.md` (if installed locally).
+- Configuration is in `cursor-tools.config.json` (or `~/.cursor-tools/config.json`).
+- API keys are loaded from `.cursor-tools.env` (or `~/.cursor-tools/.env`).
+- ClickUp commands require a `CLICKUP_API_TOKEN` to be set in your `.cursor-tools.env` file.
+- The default Stagehand model is set in `cursor-tools.config.json`, but can be overridden with the `--model` option.
+- Available models depend on your configured provider (OpenAI or Anthropic) in `cursor-tools.config.json`.
+- repo has a limit of 2M tokens of context. The context can be reduced by filtering out files in a .repomixignore file.
+- problems running browser commands may be because playwright is not installed. Recommend installing playwright globally.
+- MCP commands require `ANTHROPIC_API_KEY` to be set in your environment.
+- **Remember:** You're part of a team of superhuman expert AIs. Work together to solve complex problems.
+
+**MCP Command Options:**
+--provider=<provider>: AI provider to use (anthropic or openrouter)
+--model=<model name>: Specify an alternative AI model to use with OpenRouter. Ignored if provider is Anthropic.
+
+<!-- cursor-tools-version: 0.6.0-alpha.11 -->
+</cursor-tools Integration>
+</file>
+
+<file path="docs/codetie-docs/app/components/OgImage/OgImageDocs.vue">
+<script setup lang="ts">
+defineOptions({
+  inheritAttrs: false
+})
+defineProps({
+  title: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  }
+})
+</script>
+<template>
+  <div class="w-full h-full flex flex-col justify-center text-center bg-slate-900 p-8">
+    <div class="relative">
+      <h1 class="text-8xl mb-4 text-white">
+        {{ title }}
+      </h1>
+      <p class="text-5xl text-gray-200 leading-tight">
+        {{ description }}
+      </p>
+    </div>
+  </div>
+</template>
+</file>
+
+<file path="docs/codetie-docs/app/components/AppFooter.vue">
+<script setup lang="ts">
+const { footer } = useAppConfig()
+</script>
+<template>
+  <UFooter>
+    <template #left>
+      {{ footer.credits }}
+    </template>
+    <template #right>
+      <UColorModeButton v-if="footer?.colorMode" />
+      <template v-if="footer?.links">
+        <UButton
+          v-for="(link, index) of footer?.links"
+          :key="index"
+          v-bind="{ color: 'gray', variant: 'ghost', ...link }"
+        />
+      </template>
+    </template>
+  </UFooter>
+</template>
+</file>
+
+<file path="docs/codetie-docs/app/components/AppHeader.vue">
+<script setup lang="ts">
+import type { NavItem } from '@nuxt/content'
+const navigation = inject<NavItem[]>('navigation', [])
+const { header } = useAppConfig()
+</script>
+<template>
+  <UHeader>
+    <template #logo>
+      <template v-if="header?.logo?.dark || header?.logo?.light">
+        <UColorModeImage v-bind="{ class: 'h-6 w-auto', ...header?.logo }" />
+      </template>
+      <template v-else>
+        Nuxt UI Pro <UBadge
+          label="Docs"
+          variant="subtle"
+          class="mb-0.5"
+        />
+      </template>
+    </template>
+    <template
+      v-if="header?.search"
+      #center
+    >
+      <UContentSearchButton class="hidden lg:flex" />
+    </template>
+    <template #right>
+      <UContentSearchButton
+        v-if="header?.search"
+        :label="null"
+        class="lg:hidden"
+      />
+      <UColorModeButton v-if="header?.colorMode" />
+      <template v-if="header?.links">
+        <UButton
+          v-for="(link, index) of header.links"
+          :key="index"
+          v-bind="{ color: 'gray', variant: 'ghost', ...link }"
+        />
+      </template>
+    </template>
+    <template #panel>
+      <UNavigationTree :links="mapContentNavigation(navigation)" />
+    </template>
+  </UHeader>
+</template>
+</file>
+
+<file path="docs/codetie-docs/app/layouts/docs.vue">
+<script setup lang="ts">
+import type { NavItem } from '@nuxt/content'
+const navigation = inject<Ref<NavItem[]>>('navigation')
+</script>
+<template>
+  <UContainer>
+    <UPage>
+      <template #left>
+        <UAside>
+          <UNavigationTree :links="mapContentNavigation(navigation)" />
+        </UAside>
+      </template>
+      <slot />
+    </UPage>
+  </UContainer>
+</template>
+</file>
+
+<file path="docs/codetie-docs/app/pages/[...slug].vue">
+<script setup lang="ts">
+import { withoutTrailingSlash } from 'ufo'
+definePageMeta({
+  layout: 'docs'
+})
+const route = useRoute()
+const { toc, seo } = useAppConfig()
+const { data: page } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
+if (!page.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+}
+const { data: surround } = await useAsyncData(`${route.path}-surround`, () => queryContent()
+  .where({ _extension: 'md', navigation: { $ne: false } })
+  .only(['title', 'description', '_path'])
+  .findSurround(withoutTrailingSlash(route.path))
+)
+useSeoMeta({
+  title: page.value.title,
+  ogTitle: `${page.value.title} - ${seo?.siteName}`,
+  description: page.value.description,
+  ogDescription: page.value.description
+})
+defineOgImageComponent('Docs')
+const headline = computed(() => findPageHeadline(page.value))
+const links = computed(() => [toc?.bottom?.edit && {
+  icon: 'i-heroicons-pencil-square',
+  label: 'Edit this page',
+  to: `${toc.bottom.edit}/${page?.value?._file}`,
+  target: '_blank'
+}, ...(toc?.bottom?.links || [])].filter(Boolean))
+</script>
+<template>
+  <UPage>
+    <UPageHeader
+      :title="page.title"
+      :description="page.description"
+      :links="page.links"
+      :headline="headline"
+    />
+    <UPageBody prose>
+      <ContentRenderer
+        v-if="page.body"
+        :value="page"
+      />
+      <hr v-if="surround?.length">
+      <UContentSurround :surround="surround" />
+    </UPageBody>
+    <template
+      v-if="page.toc !== false"
+      #right
+    >
+      <UContentToc
+        :title="toc?.title"
+        :links="page.body?.toc?.links"
+      >
+        <template
+          v-if="toc?.bottom"
+          #bottom
+        >
+          <div
+            class="hidden lg:block space-y-6"
+            :class="{ '!mt-6': page.body?.toc?.links?.length }"
+          >
+            <UDivider
+              v-if="page.body?.toc?.links?.length"
+              type="dashed"
+            />
+            <UPageLinks
+              :title="toc.bottom.title"
+              :links="links"
+            />
+          </div>
+        </template>
+      </UContentToc>
+    </template>
+  </UPage>
+</template>
+</file>
+
+<file path="docs/codetie-docs/app/pages/index.vue">
+<script setup lang="ts">
+const { data: page } = await useAsyncData('index', () => queryContent('/').findOne())
+useSeoMeta({
+  titleTemplate: '',
+  title: page.value.title,
+  ogTitle: page.value.title,
+  description: page.value.description,
+  ogDescription: page.value.description
+})
+</script>
+<template>
+  <div>
+    <ULandingHero
+      v-if="page.hero"
+      v-bind="page.hero"
+    >
+      <template #headline>
+        <UBadge
+          v-if="page.hero.headline"
+          variant="subtle"
+          size="lg"
+          class="relative rounded-full font-semibold"
+        >
+          <NuxtLink
+            :to="page.hero.headline.to"
+            target="_blank"
+            class="focus:outline-none"
+            tabindex="-1"
+          >
+            <span
+              class="absolute inset-0"
+              aria-hidden="true"
+            />
+          </NuxtLink>
+          {{ page.hero.headline.label }}
+          <UIcon
+            v-if="page.hero.headline.icon"
+            :name="page.hero.headline.icon"
+            class="ml-1 w-4 h-4 pointer-events-none"
+          />
+        </UBadge>
+      </template>
+      <template #title>
+        <MDC :value="page.hero.title" />
+      </template>
+      <MDC
+        :value="page.hero.code"
+        class="prose prose-primary dark:prose-invert mx-auto"
+      />
+    </ULandingHero>
+    <ULandingSection
+      :title="page.features.title"
+      :links="page.features.links"
+    >
+      <UPageGrid>
+        <ULandingCard
+          v-for="(item, index) of page.features.items"
+          :key="index"
+          v-bind="item"
+        />
+      </UPageGrid>
+    </ULandingSection>
+  </div>
+</template>
+</file>
+
+<file path="docs/codetie-docs/app/app.config.ts">
+export default defineAppConfig({
+  ui: {
+    primary: 'green',
+    gray: 'slate',
+    footer: {
+      bottom: {
+        left: 'text-sm text-gray-500 dark:text-gray-400',
+        wrapper: 'border-t border-gray-200 dark:border-gray-800'
+      }
+    }
+  },
+  seo: {
+    // Changed from 'Nuxt UI Pro - Docs template' to 'codetie - Docs'
+    siteName: 'codetie - Docs'
+  },
+  header: {
+    logo: {
+      alt: '',
+      light: '',
+      dark: ''
+    },
+    search: true,
+    colorMode: true,
+    links: [{
+      icon: 'i-simple-icons-github',
+      to: 'https://github.com/instructa/codetie',
+      target: '_blank',
+      'aria-label': 'codetie on GitHub'
+    }]
+  },
+  footer: {
+    credits: 'Copyright © 2023',
+    colorMode: false,
+    links: [{
+      icon: 'i-simple-icons-github',
+      to: 'https://github.com/instructa/codetie',
+      target: '_blank',
+      'aria-label': 'codetie on GitHub'
+    }]
+  },
+  toc: {
+    title: 'Table of Contents',
+    bottom: {
+      title: 'Community',
+      // Changed the edit link to codetie
+      edit: 'https://github.com/instructa/codetie/edit/main/content',
+      links: [{
+        icon: 'i-heroicons-star',
+        label: 'Star on GitHub',
+        to: 'https://github.com/instructa/codetie',
+        target: '_blank'
+      }, {
+        icon: 'i-heroicons-book-open',
+        label: 'codetie docs',
+        to: 'https://github.com/instructa/codetie',
+        target: '_blank'
+      }, {
+        icon: 'i-simple-icons-nuxtdotjs',
+        label: 'Contribute or fork',
+        to: 'https://github.com/instructa/codetie',
+        target: '_blank'
+      }]
+    }
+  }
+})
+</file>
+
+<file path="docs/codetie-docs/app/app.vue">
+<script setup lang="ts">
+import type { ParsedContent } from '@nuxt/content'
+const { seo } = useAppConfig()
+const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
+const { data: files } = useLazyFetch<ParsedContent[]>('/api/search.json', {
+  default: () => [],
+  server: false
+})
+useHead({
+  meta: [
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+  ],
+  link: [
+    { rel: 'icon', href: '/favicon.ico' }
+  ],
+  htmlAttrs: {
+    lang: 'en'
+  }
+})
+useSeoMeta({
+  titleTemplate: `%s - ${seo?.siteName}`,
+  ogSiteName: seo?.siteName,
+  ogImage: 'https://docs-template.nuxt.dev/social-card.png',
+  twitterImage: 'https://docs-template.nuxt.dev/social-card.png',
+  twitterCard: 'summary_large_image'
+})
+provide('navigation', navigation)
+</script>
+<template>
+  <div>
+    <NuxtLoadingIndicator />
+    <AppHeader />
+    <UMain>
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
+    </UMain>
+    <AppFooter />
+    <ClientOnly>
+      <LazyUContentSearch
+        :files="files"
+        :navigation="navigation"
+      />
+    </ClientOnly>
+    <UNotifications />
+  </div>
+</template>
+</file>
+
+<file path="docs/codetie-docs/app/error.vue">
+<script setup lang="ts">
+import type { ParsedContent } from '@nuxt/content'
+import type { NuxtError } from '#app'
+defineProps({
+  error: {
+    type: Object as PropType<NuxtError>,
+    required: true
+  }
+})
+useHead({
+  htmlAttrs: {
+    lang: 'en'
+  }
+})
+useSeoMeta({
+  title: 'Page not found',
+  description: 'We are sorry but this page could not be found.'
+})
+const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
+const { data: files } = useLazyFetch<ParsedContent[]>('/api/search.json', {
+  default: () => [],
+  server: false
+})
+provide('navigation', navigation)
+</script>
+<template>
+  <div>
+    <AppHeader />
+    <UMain>
+      <UContainer>
+        <UPage>
+          <UPageError :error="error" />
+        </UPage>
+      </UContainer>
+    </UMain>
+    <AppFooter />
+    <ClientOnly>
+      <LazyUContentSearch
+        :files="files"
+        :navigation="navigation"
+      />
+    </ClientOnly>
+    <UNotifications />
+  </div>
+</template>
+</file>
+
+<file path="docs/codetie-docs/content/1.getting-started/_dir.yml">
+title: Getting Started
+</file>
+
+<file path="docs/codetie-docs/content/1.getting-started/installation.md">
+---
+title: Installation
+description: Get started installing codetie.
+---
+
+::callout
+---
+icon: i-heroicons-light-bulb
+target: _blank
+to: https://github.com/instructa/codetie
+---
+Use this repository to get a quick start on your codetie configuration and examples.
+::
+
+## Installing codetie
+
+You can install codetie globally with one simple command:
+
+```bash [Terminal]
+npm install -g codetie
+```
+
+Alternatively, you can also use it with `npx` directly:
+
+```bash [Terminal]
+npx codetie init
+```
+
+For local development inside a project:
+
+```bash [Terminal]
+npm install codetie --save-dev
+# Then:
+npx codetie init
+```
+
+That’s it! You can now begin setting up your AI-driven IDE rules and configurations using codetie.
+</file>
+
+<file path="docs/codetie-docs/content/1.getting-started/introduction.md">
+---
+title: Introduction
+description: Welcome to codetie documentation template.
+---
+
+This template is a ready-to-use documentation setup made for [codetie](https://github.com/instructa/codetie), a CLI tool designed to manage AI-driven IDE configurations, best practices, and cross-IDE standardization.
+
+The goal of this documentation is to show you how to use codetie effectively, ensuring your AI-assisted editing is consistent across multiple IDEs.
+
+## Features
+
+- Simple CLI usage via `npx codetie init` or `npx codetie create`.
+- AI rules easily shared across Cursor, Windsurf, Cline, and GitHub Copilot.
+- Customizable instructions to suit project-specific demands.
+- Easy integration into existing projects.
+
+## Quick Links
+
+- [Installation](/getting-started/installation)
+- [Usage](/getting-started/usage)
+</file>
+
+<file path="docs/codetie-docs/content/1.getting-started/usage.md">
+---
+title: Usage
+description: Learn how to configure and customize codetie for your IDEs.
+---
+
+codetie offers a simple CLI approach. Whether you’re working with Cursor, Windsurf, Cline, or GitHub Copilot, you can quickly bootstrap and share AI rules among different editors.
+
+## Basic Commands
+
+- **Initialize**:
+```bash
+npx codetie init
+```
+Creates or updates configuration for your default IDE (`cursor`) unless otherwise specified.
+
+- **Specify IDE**:
+```bash
+npx codetie init --ide copilot
+```
+This sets up `.github/copilot-instructions.md` with recommended rules for Copilot.
+
+- **Force Overwrite**:
+```bash
+npx codetie init --force
+```
+Overrides existing configuration files without prompting.
+
+## Example Workflow
+
+1. **Init**:
+   ```bash
+   npx codetie init --ide cursor
+   ```
+   This creates `.cursor/rules/` along with recommended codetie AI guidelines.
+
+2. **Customize**:
+   Open `.cursor/rules/` to tweak your AI instructions, coding standards, or naming conventions.
+
+3. **Commit**:
+   ```bash
+   git add .
+   git commit -m "Add custom codetie configuration for Cursor"
+   ```
+
+4. **Switch IDE**:
+   ```bash
+   npx codetie init --ide windsurf
+   ```
+   Now you have `.windsurfrules` with the same best practices, ensuring consistent AI behavior across both editors.
+
+That’s it! In just a few steps, codetie saves you from re-creating AI instructions when switching between multiple IDEs.
+</file>
+
+<file path="docs/codetie-docs/content/index.yml">
+title: "codetie - Documentation"
+description: codetie is a CLI that centralizes AI-assistant rules across multiple IDEs, ensuring consistent coding standards and project guidelines.
+navigation: false
+hero:
+  title: "Build your AI config docs in seconds"
+  description: "Use codetie to unify AI rules across your project."
+  orientation: horizontal
+  headline:
+    label: "Made with codetie"
+    to: https://github.com/instructa/codetie
+    icon: i-heroicons-arrow-top-right-on-square-20-solid
+  links:
+    - label: "Get started"
+      icon: i-heroicons-arrow-right-20-solid
+      trailing: true
+      to: "/getting-started"
+      size: lg
+    - label: "codetie repository"
+      icon: i-simple-icons-github
+      size: lg
+      color: gray
+      to: https://github.com/instructa/codetie
+      target: "_blank"
+  code: |
+    ```bash [Terminal]
+    npx codetie init
+    ```
+features:
+  title: "All-in-one docs template"
+  links:
+    - label: "Explore codetie"
+      icon: "i-simple-icons-github"
+      trailingIcon: "i-heroicons-arrow-right-20-solid"
+      color: "gray"
+      to: "https://github.com/instructa/codetie"
+      target: "_blank"
+      size: lg
+  items:
+    - title: "Single CLI"
+      description: "Use codetie to manage AI config for multiple IDEs."
+      icon: "i-heroicons-terminal-20-solid"
+      to: "https://github.com/instructa/codetie"
+      target: "_blank"
+    - title: "Markdown"
+      description: "Write your docs quickly in .md files."
+      icon: "i-simple-icons-markdown"
+      to: "https://github.com/instructa/codetie"
+      target: "_blank"
+    - title: "Modular"
+      description: "Easily add or remove rules per IDE."
+      icon: "i-heroicons-sparkles-20-solid"
+      to: "https://github.com/instructa/codetie"
+      target: "_blank"
+    - title: "TypeScript"
+      description: "A fully typed development experience for your CLI usage."
+      icon: "i-simple-icons-typescript"
+      to: "https://github.com/instructa/codetie"
+      target: "_blank"
+    - title: "Extendable"
+      description: "Tweak or replace existing rules to match your preferences."
+      icon: "i-simple-icons-codesandbox"
+      to: "https://github.com/instructa/codetie"
+      target: "_blank"
+    - title: "Search"
+      description: "Full-text search can be integrated to quickly locate docs."
+      icon: "i-heroicons-magnifying-glass-20-solid"
+      to: "https://github.com/instructa/codetie"
+      target: "_blank"
+</file>
+
+<file path="docs/codetie-docs/server/api/search.json.get.ts">
+import { serverQueryContent } from '#content/server'
+export default eventHandler(async (event) => {
+  return serverQueryContent(event).where({ _type: 'markdown', navigation: { $ne: false } }).find()
+})
+</file>
+
+<file path="docs/codetie-docs/server/tsconfig.json">
+{
+  "extends": "../.nuxt/tsconfig.server.json"
+}
+</file>
+
+<file path="docs/codetie-docs/eslint.config.mjs">
+// @ts-check
+import withNuxt from './.nuxt/eslint.config.mjs'
+
+export default withNuxt(
+  // Your custom configs here
+)
+</file>
+
+<file path="docs/codetie-docs/nuxt.config.ts">
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
+  extends: ['@nuxt/ui-pro'],
+  modules: [
+    '@nuxt/content',
+    '@nuxt/eslint',
+    '@nuxt/fonts',
+    '@nuxt/image',
+    '@nuxt/ui',
+    '@nuxthq/studio',
+    'nuxt-og-image'
+  ],
+  devtools: {
+    enabled: true
+  },
+  colorMode: {
+    disableTransition: true
+  },
+  routeRules: {
+    '/api/search.json': { prerender: true }
+  },
+  future: {
+    compatibilityVersion: 4
+  },
+  compatibilityDate: '2024-07-11',
+  nitro: {
+    prerender: {
+      routes: [
+        '/'
+      ],
+      crawlLinks: true
+    }
+  },
+  typescript: {
+    strict: false
+  },
+  hooks: {
+    // Define `@nuxt/ui` components as global to use them in `.md` (feel free to add those you need)
+    'components:extend': (components) => {
+      const globals = components.filter(c => ['UButton', 'UIcon'].includes(c.pascalName))
+      globals.forEach(c => c.global = true)
+    }
+  },
+  eslint: {
+    config: {
+      stylistic: {
+        commaDangle: 'never',
+        braceStyle: '1tbs'
+      }
+    }
+  }
+})
+</file>
+
+<file path="docs/codetie-docs/nuxt.schema.ts">
+import { field, group } from '@nuxthq/studio/theme'
+export default defineNuxtSchema({
+  appConfig: {
+    ui: group({
+      title: 'UI',
+      description: 'UI Customization.',
+      icon: 'i-mdi-palette-outline',
+      fields: {
+        icons: group({
+          title: 'Icons',
+          description: 'Manage icons used in UI Pro.',
+          icon: 'i-mdi-application-settings-outline',
+          fields: {
+            search: field({
+              type: 'icon',
+              title: 'Search Bar',
+              description: 'Icon to display in the search bar.',
+              icon: 'i-mdi-magnify',
+              default: 'i-heroicons-magnifying-glass-20-solid'
+            }),
+            dark: field({
+              type: 'icon',
+              title: 'Dark mode',
+              description: 'Icon of color mode button for dark mode.',
+              icon: 'i-mdi-moon-waning-crescent',
+              default: 'i-heroicons-moon-20-solid'
+            }),
+            light: field({
+              type: 'icon',
+              title: 'Light mode',
+              description: 'Icon of color mode button for light mode.',
+              icon: 'i-mdi-white-balance-sunny',
+              default: 'i-heroicons-sun-20-solid'
+            }),
+            external: field({
+              type: 'icon',
+              title: 'External Link',
+              description: 'Icon for external link.',
+              icon: 'i-mdi-arrow-top-right',
+              default: 'i-heroicons-arrow-up-right-20-solid'
+            }),
+            chevron: field({
+              type: 'icon',
+              title: 'Chevron',
+              description: 'Icon for chevron.',
+              icon: 'i-mdi-chevron-down',
+              default: 'i-heroicons-chevron-down-20-solid'
+            }),
+            hash: field({
+              type: 'icon',
+              title: 'Hash',
+              description: 'Icon for hash anchors.',
+              icon: 'i-ph-hash',
+              default: 'i-heroicons-hashtag-20-solid'
+            })
+          }
+        }),
+        primary: field({
+          type: 'string',
+          title: 'Primary',
+          description: 'Primary color of your UI.',
+          icon: 'i-mdi-palette-outline',
+          default: 'green',
+          required: ['sky', 'mint', 'rose', 'amber', 'violet', 'emerald', 'fuchsia', 'indigo', 'lime', 'orange', 'pink', 'purple', 'red', 'teal', 'yellow', 'green', 'blue', 'cyan', 'gray', 'white', 'black']
+        }),
+        gray: field({
+          type: 'string',
+          title: 'Gray',
+          description: 'Gray color of your UI.',
+          icon: 'i-mdi-palette-outline',
+          default: 'slate',
+          required: ['slate', 'cool', 'zinc', 'neutral', 'stone']
+        })
+      }
+    }),
+    seo: group({
+      title: 'SEO',
+      description: 'SEO configuration.',
+      icon: 'i-ph-app-window',
+      fields: {
+        siteName: field({
+          type: 'string',
+          title: 'Site Name',
+          description: 'Name used in ogSiteName and used as second part of your page title (My page title - Nuxt UI Pro).',
+          icon: 'i-mdi-web',
+          default: []
+        })
+      }
+    }),
+    header: group({
+      title: 'Header',
+      description: 'Header configuration.',
+      icon: 'i-mdi-page-layout-header',
+      fields: {
+        logo: group({
+          title: 'Logo',
+          description: 'Header logo configuration.',
+          icon: 'i-mdi-image-filter-center-focus-strong-outline',
+          fields: {
+            light: field({
+              type: 'media',
+              title: 'Light Mode Logo',
+              description: 'Pick an image from your gallery.',
+              icon: 'i-mdi-white-balance-sunny',
+              default: ''
+            }),
+            dark: field({
+              type: 'media',
+              title: 'Dark Mode Logo',
+              description: 'Pick an image from your gallery.',
+              icon: 'i-mdi-moon-waning-crescent',
+              default: ''
+            }),
+            alt: field({
+              type: 'string',
+              title: 'Alt',
+              description: 'Alt to display for accessibility.',
+              icon: 'i-mdi-alphabet-latin',
+              default: ''
+            })
+          }
+        }),
+        search: field({
+          type: 'boolean',
+          title: 'Search Bar',
+          description: 'Hide or display the search bar.',
+          icon: 'i-mdi-magnify',
+          default: true
+        }),
+        colorMode: field({
+          type: 'boolean',
+          title: 'Color Mode',
+          description: 'Hide or display the color mode button in your header.',
+          icon: 'i-mdi-moon-waning-crescent',
+          default: true
+        }),
+        links: field({
+          type: 'array',
+          title: 'Links',
+          description: 'Array of link object displayed in header.',
+          icon: 'i-mdi-link-variant',
+          default: []
+        })
+      }
+    }),
+    footer: group({
+      title: 'Footer',
+      description: 'Footer configuration.',
+      icon: 'i-mdi-page-layout-footer',
+      fields: {
+        credits: field({
+          type: 'string',
+          title: 'Footer credits section',
+          description: 'Text to display as credits in the footer.',
+          icon: 'i-mdi-circle-edit-outline',
+          default: ''
+        }),
+        colorMode: field({
+          type: 'boolean',
+          title: 'Color Mode',
+          description: 'Hide or display the color mode button in the footer.',
+          icon: 'i-mdi-moon-waning-crescent',
+          default: false
+        }),
+        links: field({
+          type: 'array',
+          title: 'Links',
+          description: 'Array of link object displayed in footer.',
+          icon: 'i-mdi-link-variant',
+          default: []
+        })
+      }
+    }),
+    toc: group({
+      title: 'Table of contents',
+      description: 'TOC configuration.',
+      icon: 'i-mdi-table-of-contents',
+      fields: {
+        title: field({
+          type: 'string',
+          title: 'Title',
+          description: 'Text to display as title of the main toc.',
+          icon: 'i-mdi-format-title',
+          default: ''
+        }),
+        bottom: group({
+          title: 'Bottom',
+          description: 'Bottom TOC configuration.',
+          icon: 'i-mdi-table-of-contents',
+          fields: {
+            title: field({
+              type: 'string',
+              title: 'Title',
+              description: 'Text to display as title of the bottom toc.',
+              icon: 'i-mdi-format-title',
+              default: ''
+            }),
+            edit: field({
+              type: 'string',
+              title: 'Edit Page Link',
+              description: 'URL of your repository content folder.',
+              icon: 'i-ph-note-pencil',
+              default: ''
+            }),
+            links: field({
+              type: 'array',
+              title: 'Links',
+              description: 'Array of link object displayed in bottom toc.',
+              icon: 'i-mdi-link-variant',
+              default: []
+            })
+          }
+        })
+      }
+    })
+  }
+})
+</file>
+
+<file path="docs/codetie-docs/package.json">
+{
+  "name": "nuxt-ui-pro-template-docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "typecheck": "nuxt typecheck"
+  },
+  "dependencies": {
+    "@iconify-json/heroicons": "^1.2.2",
+    "@iconify-json/simple-icons": "^1.2.27",
+    "@nuxt/content": "^2.13.4",
+    "@nuxt/fonts": "^0.10.3",
+    "@nuxt/image": "^1.9.0",
+    "@nuxt/ui-pro": "^1.7.1",
+    "nuxt": "^3.16.0",
+    "nuxt-og-image": "^5.0.1"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "^1.1.0",
+    "@nuxthq/studio": "^2.2.1",
+    "eslint": "^9.22.0",
+    "vue-tsc": "^2.1.10"
+  }
+}
+</file>
+
+<file path="docs/codetie-docs/README.md">
+# codetie Docs
+
+Welcome to the **codetie** documentation project! This directory provides a sample site (built on Nuxt 3) to demonstrate how you might structure documentation for your codetie-powered projects.
+
+## About codetie
+
+**codetie** is a CLI that centralizes AI-assistant rules across multiple IDEs or AI-driven code editors. It allows you to enforce consistent coding standards, best practices, or instructions to help your team or your personal workflow.
+
+## Getting Started
+
+1. **Install** codetie:
+   ```bash
+   npm install -g codetie
+   ```
+   or just use:
+   ```bash
+   npx codetie init
+   ```
+
+2. **Open** the `content/` folder. We have a few markdown files showing how a docs site can be structured.
+
+3. **Customize** the config in `app.config.ts` or `nuxt.config.ts` if you want to adapt the site (since it uses Nuxt for demonstration). Adjust the text, add or remove sections, and adapt the code to match your brand or style.
+
+4. **Run** your docs site locally:
+   ```bash
+   pnpm install
+   pnpm dev
+   ```
+   or use npm/yarn if you prefer.
+
+## Contributing
+
+We welcome community contributions! Submit pull requests or open issues on the main [codetie GitHub repository](https://github.com/instructa/codetie).
+
+Enjoy managing your multi-IDE AI configurations with codetie!
+</file>
+
+<file path="docs/codetie-docs/renovate.json">
+{
+  "extends": [
+    "github>nuxt/renovate-config-nuxt"
+  ],
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "ignoreDeps": [
+    "vue-tsc"
+  ],
+  "baseBranches": ["v1", "v3"],
+  "packageRules": [{
+    "matchDepTypes": ["resolutions"],
+    "enabled": false
+  }],
+  "postUpdateOptions": ["pnpmDedupe"]
+}
+</file>
+
+<file path="docs/codetie-docs/tailwind.config.ts">
+import type { Config } from 'tailwindcss'
+import defaultTheme from 'tailwindcss/defaultTheme'
+export default <Partial<Config>>{
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['DM Sans', ...defaultTheme.fontFamily.sans]
+      },
+      colors: {
+        green: {
+          50: '#EFFDF5',
+          100: '#D9FBE8',
+          200: '#B3F5D1',
+          300: '#75EDAE',
+          400: '#00DC82',
+          500: '#00C16A',
+          600: '#00A155',
+          700: '#007F45',
+          800: '#016538',
+          900: '#0A5331',
+          950: '#052e16'
+        }
+      }
+    }
+  }
+}
+</file>
+
+<file path="docs/codetie-docs/tsconfig.json">
+{
+  // https://nuxt.com/docs/guide/concepts/typescript
+  "extends": "./.nuxt/tsconfig.json"
+}
+</file>
+
+<file path="packages/codetie/src/commands/_shared.ts">
+import type { ArgDef } from 'citty'
+export const cwdArgs = {
+  cwd: {
+    type: 'string',
+    description: 'Specify the working directory',
+    valueHint: 'directory',
+    default: '.',
+  },
+} as const satisfies Record<string, ArgDef>
+export const logLevelArgs = {
+  logLevel: {
+    type: 'string',
+    description: 'Specify build-time log level',
+    valueHint: 'silent|info|verbose',
+  },
+} as const satisfies Record<string, ArgDef>
+export const envNameArgs = {
+  envName: {
+    type: 'string',
+    description: 'The environment to use when resolving configuration overrides (default is `production` when building, and `development` when running the dev server)',
+  },
+} as const satisfies Record<string, ArgDef>
+export const dotEnvArgs = {
+  dotenv: {
+    type: 'string',
+    description: 'Path to `.env` file to load, relative to the root directory',
+  },
+} as const satisfies Record<string, ArgDef>
+export const legacyRootDirArgs = {
+  // cwd falls back to rootDir's default (indirect default)
+  cwd: {
+    ...cwdArgs.cwd,
+    description: 'Specify the working directory, this takes precedence over ROOTDIR (default: `.`)',
+    default: undefined,
+  },
+  rootDir: {
+    type: 'positional',
+    description: 'Specifies the working directory (default: `.`)',
+    required: false,
+    default: '.',
+  },
+} as const satisfies Record<string, ArgDef>
+</file>
+
+<file path="packages/codetie/src/commands/add.ts">
+import { existsSync, promises as fsp } from 'node:fs'
+import process from 'node:process'
+import { defineCommand } from 'citty'
+import type { CommandDef, ArgsDef } from 'citty'
+import { dirname, resolve, join } from 'pathe'
+import { consola } from 'consola'
+import { downloadTemplate } from 'giget'
+import { fileURLToPath } from 'node:url'
+// Define shared args types
+interface SharedArgs {
+  cwd?: string
+  logLevel?: string
+}
+const cwdArgs = {
+  cwd: {
+    type: 'string',
+    description: 'Current working directory'
+  }
+} as const
+const logLevelArgs = {
+  logLevel: {
+    type: 'string',
+    description: 'Log level'
+  }
+} as const
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+const COMPONENTS_DIR = resolve(__dirname, '../../../templates/components')
+const REMOTE_TEMPLATE_BASE = 'https://instructa.ai/r/templates'
+interface AddCommandArgs extends SharedArgs {
+  force: boolean
+  name: string
+  target: string
+}
+const addCommandArgs = {
+  ...cwdArgs,
+  ...logLevelArgs,
+  force: {
+    type: 'boolean',
+    description: 'Override existing files',
+    default: false,
+  },
+  name: {
+    type: 'positional',
+    required: true,
+    description: 'Component name or URL to add',
+  },
+  target: {
+    type: 'string',
+    description: 'Target directory to add the component to',
+    default: 'components',
+  },
+} as const satisfies ArgsDef
+export default defineCommand({
+  meta: {
+    name: 'add',
+    description: 'Add a component template or download from URL.',
+  },
+  args: addCommandArgs,
+  async run(ctx) {
+    const args = ctx.args as AddCommandArgs
+    const cwd = resolve(args.cwd || '.')
+    const componentName = args.name
+    const targetDir = resolve(cwd, args.target)
+    // Ensure target directory exists
+    if (!existsSync(targetDir)) {
+      await fsp.mkdir(targetDir, { recursive: true })
+      consola.info(`Created directory: ${targetDir}`)
+    }
+    try {
+      // Check if input is a URL
+      const isUrl = componentName.startsWith('http://') || componentName.startsWith('https://')
+      if (isUrl) {
+        // Handle remote template
+        await handleRemoteTemplate(componentName, targetDir, args.force)
+      } else {
+        // Handle local template
+        await handleLocalTemplate(componentName, targetDir, args.force)
+      }
+      consola.success(`Successfully added ${componentName} to ${targetDir}`)
+    } catch (error) {
+      consola.error(`Failed to add ${componentName}: ${error}`)
+      process.exit(1)
+    }
+  },
+}) as CommandDef
+async function handleLocalTemplate(
+  componentName: string,
+  targetDir: string,
+  force: boolean
+) {
+  // Check if component template exists in components directory
+  const templatePath = join(COMPONENTS_DIR, componentName)
+  if (!existsSync(templatePath)) {
+    throw new Error(`Template '${componentName}' not found in components directory`)
+  }
+  // Get list of files in template directory
+  const files = await fsp.readdir(templatePath, { withFileTypes: true })
+  for (const file of files) {
+    const sourcePath = join(templatePath, file.name)
+    const targetPath = join(targetDir, componentName, file.name)
+    // Check if target exists and force flag is not set
+    if (existsSync(targetPath) && !force) {
+      throw new Error(
+        `File ${targetPath} already exists. Use --force to override.`
+      )
+    }
+    // Create component directory if it doesn't exist
+    await fsp.mkdir(dirname(targetPath), { recursive: true })
+    if (file.isDirectory()) {
+      // Recursively copy directory
+      await fsp.cp(sourcePath, targetPath, { recursive: true, force })
+    } else {
+      // Copy file
+      await fsp.copyFile(sourcePath, targetPath)
+    }
+    consola.info(`Added ${file.name} to ${targetPath}`)
+  }
+}
+async function handleRemoteTemplate(
+  url: string,
+  targetDir: string,
+  force: boolean
+) {
+  // If URL is a shorthand (e.g., sidebar-01), convert to full URL
+  if (!url.startsWith('http')) {
+    url = `${REMOTE_TEMPLATE_BASE}/${url}`
+  }
+  try {
+    // Download template using giget
+    await downloadTemplate(url, {
+      dir: targetDir,
+      force
+    })
+  } catch (error) {
+    throw new Error(`Failed to download template from ${url}: ${error}`)
+  }
+}
+</file>
+
+<file path="packages/codetie/src/commands/create.ts">
+import { existsSync } from 'node:fs'
+import process from 'node:process'
+import { execSync } from 'node:child_process'
+import { defineCommand, runMain } from 'citty'
+import { consola } from 'consola'
+import { colors } from 'consola/utils'
+import { resolve, relative } from 'pathe'
+import fs from 'fs-extra'
+import { fileURLToPath } from 'node:url'
+import { dirname } from 'pathe'
+import { downloadTemplate } from 'giget'
+import { cwdArgs, logLevelArgs } from './_shared'
+import initCommandDef from './init'
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+const templateDir = resolve(__dirname, '../../../templates')
+const DEFAULT_TEMPLATE = 'starter/base-starter'
+const DEFAULT_REGISTRY = 'https://raw.githubusercontent.com/instructa/codetie/main/templates'
+const renameFiles: Record<string, string | undefined> = {
+  _gitignore: '.gitignore',
+  _cursorignore: '.cursorignore',
+  _prettierrc: '.prettierrc',
+  _prettierignore: '.prettierignore',
+  _eslintrc: '.eslintrc.js',
+}
+// Package manager options
+const packageManagerOptions = ['npm', 'yarn', 'pnpm'] as const
+type PackageManagerName = typeof packageManagerOptions[number]
+const initCommand = defineCommand({
+  meta: {
+    name: 'init',
+    description: 'Initialize a fresh codetie project',
+  },
+  args: {
+    ...cwdArgs,
+    ...logLevelArgs,
+    dir: {
+      type: 'positional',
+      description: 'Project directory',
+      default: '',
+    },
+    name: {
+      type: 'string',
+      description: 'Project name',
+    },
+    force: {
+      type: 'boolean',
+      alias: 'f',
+      description: 'Override existing directory',
+    },
+    install: {
+      type: 'boolean',
+      default: true,
+      description: 'Skip installing dependencies',
+    },
+    template: {
+      type: 'string',
+      alias: 't',
+      description: 'Template name or repository URL',
+      default: DEFAULT_TEMPLATE,
+    },
+    gitInit: {
+      type: 'boolean',
+      description: 'Initialize git repository',
+    },
+    packageManager: {
+      type: 'string',
+      description: 'Package manager choice (npm, pnpm, yarn)',
+    },
+    yes: {
+      type: 'boolean',
+      default: false,
+      description: 'Skip confirmation prompt',
+      alias: 'y',
+    },
+    defaults: {
+      type: 'boolean',
+      default: false,
+      description: 'Use default configuration',
+      alias: 'd',
+    },
+    silent: {
+      type: 'boolean',
+      default: false,
+      description: 'Mute output',
+      alias: 's',
+    },
+    help: {
+      type: 'boolean',
+      description: 'Display help for command',
+      alias: 'h',
+    },
+  },
+  async run(ctx) {
+    // Handle help option
+    if (ctx.args.help) {
+      return
+    }
+    // Get the current working directory
+    const argsCwd = ctx.args.cwd || '.'
+    const cwd = resolve(argsCwd)
+    // Configure console output based on silent mode
+    if (ctx.args.silent) {
+      consola.level = 0
+    }
+    try {
+      // Get project name from args or prompt
+      let projectName = ctx.args.name || ctx.args.dir || ''
+      // If using defaults, use default project name without prompting
+      if (!projectName && ctx.args.defaults) {
+        projectName = 'my-codetie-project'
+      } else if (!projectName && !ctx.args.yes) {
+        projectName = await consola.prompt('Where would you like to create your codetie project?', {
+          placeholder: 'my-codetie-game',
+          type: 'text',
+          default: 'my-codetie-game',
+        })
+      } else if (!projectName) {
+        projectName = 'my-codetie-game'
+      }
+      if (!projectName) {
+        consola.error('Project name is required')
+        process.exit(1)
+      }
+      // Project directory
+      const root = resolve(cwd, projectName)
+      consola.info(`Creating a new project in ${colors.cyan(relative(cwd, root) || root)}.`)
+      // Get template name
+      const templateName = ctx.args.template || DEFAULT_TEMPLATE
+      if (typeof templateName !== 'string') {
+        consola.error('Please specify a template!')
+        process.exit(1)
+      }
+      // Check if directory exists
+      let shouldForce = Boolean(ctx.args.force)
+      if (!shouldForce && existsSync(root) && !ctx.args.yes && !ctx.args.defaults) {
+        const selectedAction = await consola.prompt(
+          `The directory ${colors.cyan(root)} already exists. What would you like to do?`,
+          {
+            type: 'select',
+            options: ['Override its contents', 'Select different directory', 'Abort'],
+          },
+        )
+        switch (selectedAction) {
+          case 'Override its contents':
+            shouldForce = true
+            break
+          case 'Select different directory': {
+            const newDir = await consola.prompt('Please specify a different directory:', {
+              type: 'text',
+            })
+            if (!newDir) process.exit(1)
+            projectName = newDir
+            break
+          }
+          default:
+            process.exit(1)
+        }
+      } else if (!shouldForce && existsSync(root) && (ctx.args.yes || ctx.args.defaults)) {
+        shouldForce = true
+      }
+      // Download template
+      consola.info(`Downloading template: ${templateName}...`)
+      try {
+        let templateUrl = templateName
+        // If it's the default template or a known template name
+        if (templateName === DEFAULT_TEMPLATE || !templateName.includes('/')) {
+          templateUrl = `gh:instructa/codetie/templates/${templateName}`
+        }
+        await downloadTemplate(templateUrl, {
+          dir: root,
+          force: shouldForce
+        })
+        consola.success('Template downloaded successfully!')
+      } catch (error) {
+        consola.error('Failed to download template:', error)
+        process.exit(1)
+      }
+      // Get project details
+      let description = `A codetie game called ${projectName}`
+      let authorName = getGitUser() || 'codetie Developer'
+      if (!ctx.args.defaults && !ctx.args.yes) {
+        description = await consola.prompt('Enter project description:', {
+          default: description,
+          type: 'text',
+        }) || description
+        authorName = await consola.prompt('Enter author name:', {
+          default: authorName,
+          type: 'text',
+        }) || authorName
+      }
+      // Process template files
+      const templateVariables = {
+        PROJECT_NAME: projectName,
+        DESCRIPTION: description,
+        AUTHOR_NAME: authorName,
+        CURRENT_YEAR: new Date().getFullYear(),
+      }
+      // Process template files (like README.md.mustache)
+      processTemplateFiles(templateDir, root, templateVariables)
+      // Update package.json
+      updatePackageJson(root, projectName, description, authorName)
+      // After template is downloaded and configured, run the init command
+      consola.info('Initializing IDE configuration...')
+      try {
+        if (initCommandDef?.run) {
+          await initCommandDef.run({
+            args: {
+              ide: 'cursor',
+              force: ctx.args.force,
+              _: []
+            },
+            data: {},
+            rawArgs: [],
+            cmd: initCommandDef
+          })
+        }
+      } catch (error) {
+        consola.warn('Failed to initialize IDE configuration:', error)
+        // Don't exit here as this is not critical
+      }
+      // Install dependencies
+      if (ctx.args.install !== false) {
+        // Resolve package manager
+        const packageManagerArg = ctx.args.packageManager as PackageManagerName
+        // Determine which package manager to use
+        let selectedPackageManager: PackageManagerName | undefined
+        if (packageManagerOptions.includes(packageManagerArg as any)) {
+          selectedPackageManager = packageManagerArg
+        } else if (ctx.args.defaults) {
+          selectedPackageManager = 'npm' as const
+        } else if (ctx.args.yes) {
+          selectedPackageManager = 'npm' as const
+        } else {
+          const pmChoice = await consola.prompt('Which package manager would you like to use?', {
+            type: 'select',
+            options: [...packageManagerOptions] as string[],
+          })
+          if (pmChoice && packageManagerOptions.includes(pmChoice as any)) {
+            selectedPackageManager = pmChoice as PackageManagerName
+          } else {
+            selectedPackageManager = 'npm' as const
+          }
+        }
+        if (selectedPackageManager) {
+          consola.info(`Installing dependencies with ${selectedPackageManager}...`)
+          try {
+            let command = ''
+            switch (selectedPackageManager) {
+              case 'npm':
+                command = 'npm install'
+                break
+              case 'yarn':
+                command = 'yarn'
+                break
+              case 'pnpm':
+                command = 'pnpm install'
+                break
+            }
+            execSync(command, { cwd: root, stdio: 'inherit' })
+            consola.success('Dependencies installed successfully!')
+          } catch (error) {
+            consola.error('Failed to install dependencies:', error)
+          }
+        }
+      } else {
+        consola.info('Skipping install dependencies step.')
+      }
+      // Initialize git repository
+      let shouldInitGit = ctx.args.gitInit
+      if (shouldInitGit === undefined) {
+        if (ctx.args.defaults) {
+          shouldInitGit = true
+        } else if (ctx.args.yes) {
+          shouldInitGit = true
+        } else {
+          shouldInitGit = await consola.prompt('Initialize git repository?', {
+            type: 'confirm',
+          })
+        }
+      }
+      if (shouldInitGit) {
+        consola.info('Initializing git repository...')
+        try {
+          execSync('git init', { cwd: root, stdio: 'inherit' })
+        } catch (err) {
+          consola.warn(`Failed to initialize git repository: ${err}`)
+        }
+      }
+      // Display next steps
+      const relativeRoot = relative(process.cwd(), root) || '.'
+      consola.box(`
+codetie project created successfully! 🎉
+Project: ${projectName}
+Template: ${templateName}
+Location: ${root}
+Next steps:
+${relativeRoot !== '.' ? `1. cd ${relativeRoot}` : ''}
+${relativeRoot !== '.' ? '2' : '1'}. npm run dev (or yarn dev, pnpm dev)
+${relativeRoot !== '.' ? '3' : '2'}. Open your browser at http://localhost:5173
+Happy game development! 🚀
+      `)
+    } catch (error) {
+      consola.error(error)
+      process.exit(1)
+    }
+  },
+})
+function getGitUser() {
+  try {
+    const name = execSync('git config user.name').toString().trim()
+    return name
+  } catch (e) {
+    return ''
+  }
+}
+function processTemplateFiles(
+  templateDir: string,
+  targetDir: string,
+  variables: Record<string, any>
+) {
+  if (!existsSync(templateDir)) {
+    return // Skip if template directory doesn't exist
+  }
+  const files = fs.readdirSync(templateDir, { withFileTypes: true })
+  for (const file of files) {
+    const srcPath = resolve(templateDir, file.name)
+    const destPath = resolve(targetDir, renameFiles[file.name] || file.name)
+    if (file.isDirectory()) {
+      fs.ensureDirSync(destPath)
+      processTemplateFiles(srcPath, destPath, variables)
+    } else if (file.name.endsWith('.mustache')) {
+      const content = fs.readFileSync(srcPath, 'utf-8')
+      const rendered = renderTemplate(content, variables)
+      fs.writeFileSync(destPath.replace(/\.mustache$/g, ''), rendered)
+    } else {
+      fs.copyFileSync(srcPath, destPath)
+    }
+  }
+}
+function renderTemplate(template: string, variables: Record<string, any>): string {
+  return template.replace(/\{\{\s*([^}]+)\s*\}\}/g, (_, key) => {
+    return variables[key.trim()] || ''
+  })
+}
+function updatePackageJson(
+  root: string,
+  projectName: string,
+  description: string,
+  authorName: string
+) {
+  const packageJsonPath = resolve(root, 'package.json')
+  if (existsSync(packageJsonPath)) {
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
+    // Update package.json with new project details
+    packageJson.name = projectName
+    packageJson.description = description
+    packageJson.author = authorName
+    fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2))
+  }
+}
+// Main command with subcommands
+const main = defineCommand({
+  meta: {
+    name: 'codetie',
+    description: 'codetie CLI tools',
+  },
+  subCommands: {
+    init: initCommand,
+  }
+})
+runMain(main)
+</file>
+
+<file path="packages/codetie/src/commands/init.ts">
+import { existsSync, promises as fsp } from 'node:fs'
+import process from 'node:process'
+import { defineCommand } from 'citty'
+import { resolve, join, dirname } from 'pathe'
+import { consola } from 'consola'
+import { fileURLToPath } from 'node:url'
+import { downloadTemplate } from 'giget'
+const IDE_OPTIONS = ['cursor', 'windsurf', 'cline', 'copilot'] as const
+type IDEOption = typeof IDE_OPTIONS[number]
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+const DEFAULT_REGISTRY = 'https://raw.githubusercontent.com/instructa/codetie/main/templates'
+export default defineCommand({
+  meta: {
+    name: 'init',
+    description: 'Initialize IDE-specific configuration files',
+  },
+  args: {
+    ide: {
+      type: 'string',
+      description: 'IDE to initialize configuration for',
+      default: 'cursor',
+      options: IDE_OPTIONS,
+    },
+    force: {
+      type: 'boolean',
+      description: 'Override existing files without prompting',
+      default: false,
+    },
+  },
+  async run(ctx) {
+    try {
+      consola.info('Starting IDE configuration initialization...')
+      const selectedIDE = ctx.args.ide as IDEOption || 'cursor'
+      consola.info(`Selected IDE: ${selectedIDE}`)
+      if (!IDE_OPTIONS.includes(selectedIDE)) {
+        consola.error(`Invalid IDE option. Available options: ${IDE_OPTIONS.join(', ')}`)
+        process.exit(1)
+      }
+      // Create IDE directory (e.g., .cursor)
+      const targetDir = resolve(process.cwd(), `.${selectedIDE}`)
+      consola.info(`Creating configuration directory: ${targetDir}`)
+      try {
+        // Download template from GitHub
+        const templatePath = `codetie-init/${selectedIDE}`
+        consola.info(`Downloading template: ${templatePath}...`)
+        try {
+          await downloadTemplate(`gh:instructa/codetie/templates/${templatePath}`, {
+            dir: targetDir,
+            force: ctx.args.force
+          })
+          consola.success(`Successfully downloaded and initialized ${selectedIDE} configuration!`)
+          consola.info(`Configuration files are located in: ${targetDir}`)
+        } catch (error) {
+          consola.error(`Failed to download template for IDE: ${selectedIDE}`, error)
+          consola.info('Please check if the template exists in the repository.')
+          process.exit(1)
+        }
+      } catch (error) {
+        consola.error('Failed to initialize configuration:', error)
+        process.exit(1)
+      }
+    } catch (error) {
+      consola.error('Failed to initialize configuration:', error)
+      process.exit(1)
+    }
+  },
+})
+</file>
+
+<file path="packages/codetie/src/utils/logger.ts">
+import { consola } from 'consola'
+import { colors } from 'consola/utils'
+export const logger = consola.withTag(colors.whiteBright(colors.bold(colors.bgGreenBright(' nuxi '))))
+</file>
+
+<file path="packages/codetie/src/index.ts">
+import { runMain } from 'citty'
+import main from './main'
+const runCmd = () => runMain(main)
+export { runCmd }
+runCmd()
+</file>
+
+<file path="packages/codetie/src/main.ts">
+import { defineCommand, showUsage } from 'citty'
+import pkg from '../package.json' assert { type: 'json' }
+export default defineCommand({
+  meta: {
+    name: 'codetie',
+    version: pkg.version,
+    description: pkg.description,
+  },
+  args: {
+    help: {
+      type: 'boolean',
+      description: 'Show general usage',
+      default: false,
+    },
+  },
+  subCommands: {
+    init: () => import('./commands/init').then((m) => m.default),
+    add: () => import('./commands/add').then((m) => m.default),
+  },
+  async run({ args, cmd }) {
+    if (args.help || !args._.length) {
+      showUsage(cmd)
+      return
+    }
+  },
+})
+</file>
+
+<file path="packages/codetie/src/utils.ts">
+/**
+ * Represents a GitHub API content item response
+ */
+interface GitHubContentItem {
+  name: string
+  path: string
+  sha: string
+  size: number
+  url: string
+  html_url: string
+  git_url: string
+  download_url: string | null
+  type: 'file' | 'dir' | 'symlink' | 'submodule'
+}
+/**
+ * Custom error class for GitHub API related errors
+ */
+export class GitHubAPIError extends Error {
+  constructor(
+    public status: number,
+    message: string
+  ) {
+    super(message)
+    this.name = 'GitHubAPIError'
+  }
+}
+/**
+ * Checks if a directory exists in a GitHub repository
+ * @param repoOwner - The owner of the repository
+ * @param repoName - The name of the repository
+ * @param directoryName - The directory to check
+ * @throws {GitHubAPIError} If the API request fails
+ * @throws {Error} If the directory is not found or other errors occur
+ */
+export async function checkDirectoryExists(
+  repoOwner: string,
+  repoName: string,
+  directoryName: string
+): Promise<boolean> {
+  const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/`
+  try {
+    const response = await fetch(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    })
+    if (!response.ok) {
+      throw new GitHubAPIError(
+        response.status,
+        `Failed to fetch repository contents: ${response.statusText}`
+      )
+    }
+    const contents: GitHubContentItem[] = await response.json()
+    const directoryExists = contents.some(
+      (item) => item.name === directoryName && item.type === 'dir'
+    )
+    if (directoryExists) {
+      return true
+    }
+    return false
+  } catch (error) {
+    if (error instanceof GitHubAPIError) {
+      throw error
+    }
+    throw new Error(error instanceof Error ? error.message : 'Unknown error occurred')
+  }
+}
+</file>
+
+<file path="packages/codetie/build.config.ts">
+import { defineBuildConfig } from "unbuild";
+export default defineBuildConfig({
+  entries: ["src/index"],
+  clean: true,
+  rollup: {
+    emitCJS: false,
+    inlineDependencies: true,
+  },
+  alias: {
+    // Add any aliases if needed
+  },
+  hooks: {
+    "build:done": () => {
+      // Any post-build tasks
+    },
+  },
+});
+</file>
+
+<file path="packages/codetie/index.js">
+#!/usr/bin/env node
+import "./dist/index.mjs";
+</file>
+
+<file path="packages/codetie/package.json">
+{
+  "name": "codetie",
+  "version": "0.0.1",
+  "description": "A CLI for building interactive 3D web apps with optional agile-lite workflow management.",
+  "type": "module",
+  "main": "dist/index.mjs",
+  "bin": {
+    "codetie": "index.js"
+  },
+  "files": [
+    "dist",
+    "template",
+    "index.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/instructa/codetie"
+  },
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "prepublishOnly": "npm run build",
+    "release": "npm publish",
+    "release:alpha": "npm publish --tag alpha"
+  },
+  "keywords": [
+    "3d",
+    "cli",
+    "react-three-fiber",
+    "vite",
+    "ai",
+    "agile-lite",
+    "workflow"
+  ],
+  "author": "Kevin Kern",
+  "license": "MIT",
+  "dependencies": {
+    "citty": "^0.1.5",
+    "consola": "^3.2.3",
+    "fs-extra": "^11.2.0",
+    "giget": "^2.0.0",
+    "pathe": "^1.1.1",
+    "scule": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.4.2",
+    "typescript": "^5.3.3",
+    "unbuild": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
+</file>
+
+<file path="packages/codetie/README.md">
+# codetie
+
+A CLI to bootstrap 3D/interactive web projects in a modern, AI-friendly environment. This version includes a minimal "agile-lite" workflow system designed to handle essential planning documents (PRD, architecture, story) and optionally auto-generate rules for your AI environment if needed.
+
+## Features
+
+- **Project Init** – Quickly scaffold a 3D React + Three.js app or another template.
+- **Workflow Management** – Optionally install a minimal agile-lite workflow that helps keep you organized.
+- **No External Scripts** – Everything integrated into `codetie` subcommands. No extra .sh or .bat needed.
+- **Extendable** – Expand the workflow system with additional .mdc files or templates as you see fit.
+
+---
+
+## Installation
+
+```bash
+npm i codetie -g
+
+Or run with npx:
+
+npx codetie@latest init
+
+Usage
+
+Initialize a new project:
+
+npx codetie init myapp
+
+Then optionally install the agile-lite workflow:
+
+cd myapp
+npx codetie workflow agile-lite
+
+Project Structure
+
+When you install an agile-lite workflow, you get:
+
+myapp/
+├── devnotes/                  # Where minimal .mdc docs reside
+│   ├── 700-agile-lite.mdc     # Light agile workflow instructions
+│   ├── 701-prd-template.mdc   # PRD template or rules
+│   ├── 702-arch-template.mdc  # Architecture template
+│   └── ...
+├── src/                       # Your app code
+├── package.json
+├── README.md
+└── ...
+
+You can fully customize these templates or rename them as needed.
+
+Commands
+    •	codetie init [projectName]
+Creates a new project from a recommended starter template or from another template.
+    •	codetie workflow [workflowName]
+Installs the chosen workflow’s devnotes (like agile-lite) into your project.
+
+Contributing
+
+Contributions and ideas are welcome. Submit pull requests or discuss improvements.
+
+License
+
+MIT
+</file>
+
+<file path="packages/codetie/tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "declaration": true,
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
+</file>
+
+<file path="scripts/release.ts">
+import { execSync } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
+// List of packages to publish
+const packages = ['codetie'];
+// List of all packages that need version bumping (including those not published)
+// @TODO
+const allPackages = ['codetie', 'codetie-starter'];
+function run(command: string, cwd: string) {
+  console.log(`Executing: ${command} in ${cwd}`);
+  execSync(command, { stdio: 'inherit', cwd });
+}
+/**
+ * Bump version in package.json
+ * @param pkgPath Path to the package directory
+ * @param type Version bump type: 'major', 'minor', 'patch', or specific version
+ * @returns The new version
+ */
+function bumpVersion(pkgPath: string, type: 'major' | 'minor' | 'patch' | string): string {
+  const pkgJsonPath = path.join(pkgPath, 'package.json');
+  const pkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf-8'));
+  const currentVersion = pkgJson.version;
+  let newVersion: string;
+  if (type === 'major' || type === 'minor' || type === 'patch') {
+    // Parse current version
+    const [major, minor, patch] = currentVersion.split('.').map(Number);
+    // Bump version according to type
+    if (type === 'major') {
+      newVersion = `${major + 1}.0.0`;
+    } else if (type === 'minor') {
+      newVersion = `${major}.${minor + 1}.0`;
+    } else { // patch
+      newVersion = `${major}.${minor}.${patch + 1}`;
+    }
+  } else {
+    // Use the provided version string directly
+    newVersion = type;
+  }
+  // Update package.json
+  pkgJson.version = newVersion;
+  fs.writeFileSync(pkgJsonPath, JSON.stringify(pkgJson, null, 2) + '\n');
+  console.log(`Bumped version from ${currentVersion} to ${newVersion} in ${pkgJsonPath}`);
+  return newVersion;
+}
+/**
+ * Bump version in all package.json files
+ * @param versionBump Version bump type or specific version
+ * @returns The new version
+ */
+function bumpAllVersions(versionBump: 'major' | 'minor' | 'patch' | string = 'patch'): string {
+  // First bump the root package.json
+  const rootPath = path.resolve('.');
+  const newVersion = bumpVersion(rootPath, versionBump);
+  // Then bump all package.json files in the packages directory
+  for (const pkg of allPackages) {
+    const pkgPath = path.resolve(`packages/${pkg}`);
+    if (fs.existsSync(path.join(pkgPath, 'package.json'))) {
+      // Use the same version for all packages
+      bumpVersion(pkgPath, newVersion);
+    }
+  }
+  return newVersion;
+}
+/**
+ * Create a git commit and tag for the release
+ * @param version The version to tag
+ */
+function createGitCommitAndTag(version: string) {
+  console.log('Creating git commit and tag...');
+  try {
+    // Stage all changes
+    run('git add .', '.');
+    // Create commit with version message
+    run(`git commit -m "chore: release v${version}"`, '.');
+    // Create tag
+    run(`git tag -a v${version} -m "Release v${version}"`, '.');
+    // Push commit and tag to remote
+    console.log('Pushing commit and tag to remote...');
+    run('git push', '.');
+    run('git push --tags', '.');
+    console.log(`Successfully created and pushed git tag v${version}`);
+  } catch (error) {
+    console.error('Failed to create git commit and tag:', error);
+    throw error;
+  }
+}
+async function publishPackages(versionBump: 'major' | 'minor' | 'patch' | string = 'patch') {
+  // Bump all versions first
+  const newVersion = bumpAllVersions(versionBump);
+  // Create git commit and tag
+  createGitCommitAndTag(newVersion);
+  // Then publish the packages that need to be published
+  for (const pkg of packages) {
+    const pkgPath = path.resolve(`packages/${pkg}`);
+    console.log(`Publishing ${pkg}@${newVersion}...`);
+    run('pnpm publish --no-git-checks', pkgPath);
+  }
+}
+// Get version bump type from command line arguments
+const args = process.argv.slice(2);
+const versionBumpArg = args[0] || 'patch'; // Default to patch
+publishPackages(versionBumpArg).catch(console.error);
+</file>
+
+<file path="templates/codetie-init/.cursor/rules/modes/impl-agent.mdc">
+---
+description: 
+globs: 
+alwaysApply: false
+---
+
+You are Levin, a specialized software development AI agent. Your primary goal is to fulfill all user stories. 
+
+You always greet with a random "leetspeak" welcome message (only once)!
+
+CRITICAL RULES:
+- DON'T skip a step and wait until one step is 100% finished!
+- Server is already started. Never run `npm run dev` on your own. The development server is already started!
+
+Follow these guidelines:
+
+1. first read [roadmap.json](mdc:.planr/roadmap.json) and learn about latest changes and use it as your memory. Allowed status for stories are todo or done.
+
+2. If you haven't done so read all related cursor rules for the task.
+
+3. Proceed with implementing the current story `.planr/stories/{{STORY-ID}}`, ensuring you address all acceptance criteria.
+
+4. write all infos about updates, fixes, to the "Developer Notes" section in `.planr/stories/{{STORY-ID}}`. Do the same in [roadmap.json](mdc:.planr/roadmap.json) in `notes` but keep it for the 10 most important max.
+
+5. ask if you should proceed wit the next story
+</file>
+
+<file path="templates/codetie-init/.cursor/rules/modes/plan.mdc">
+---
+description: PLANNING MODE is used to create stories, specification and update project plans
+globs: 
+alwaysApply: false
+---
+
+You are Olena, a specialized product planner, requirements engineer AI agent. 
+
+Rules:
+- Writing Style: No fluff, only the essential information—short as possible without losing details.
+
+You have two modes:
+
+1. "init" - this mode initializes the project with all stories and the roadmap
+2. "add" - this mode adds more stories to your project
+
+Your working directory and file structure:
+
+```
+[root]
+    [.planr/]
+        [stories/] # list of stories to work on
+            {STORY-ID}.md
+    roadmap.json # follow this step by step
+    assetlist.json # models, sounds, textures
+    prd.md # product requirements document
+```
+
+<modes>
+    <init>
+        Your task is to create all stories bsed on the [prd.md](mdc:.planr/prd.md) file.
+        
+        STEPS:
+        1. Create a story using [story.tpl.mdc](mdc:.cursor/rules/templates/story.tpl.mdc) from [prd.md](mdc:.planr/prd.md) in the format `.planr/stories/{STORY-ID}.md`
+        2. Update [roadmap.json](mdc:.planr/roadmap.json) list using [task.tpl.mdc](mdc:.cursor/rules/templates/task.tpl.mdc) based on the story
+        3. Proceed with next story
+    </init>
+
+    <add>
+        Your task is to create a new story based on the given input
+
+        STEPS:
+        1. Create a new story using [story.tpl.mdc](mdc:.cursor/rules/templates/story.tpl.mdc) based on the given input in the format `.planr/stories/{STORY-ID}.md`
+        3. Update [roadmap.json](mdc:.planr/roadmap.json) list using [task.tpl.mdc](mdc:.cursor/rules/templates/task.tpl.mdc) based on the story
+    </add>
+</modes>
+</file>
+
+<file path="templates/codetie-init/.cursor/rules/001-base.mdc">
+---
+description: Viber3D Coding Guidelines
+globs: *,**/*
+alwaysApply: true
+---
+# Instructions
+
+1. Always use codebase_search with target_directories="src,app" first to find existing core files
+2. Always check existing system files' purposes before creating new ones with similar functionality
+3. Always list the cursor rules you're using
+
+- If a prompt or request specifies certain behaviors, languages, or output formats, you must obey them without deviation.
+- Do not include explanations, reasoning, or filler text unless explicitly instructed. Stick strictly to the requested output.
+- If multiple steps or sub-requests are given, address them in the specified order. Provide answers in the exact format or sequence requested.
+- Pay close attention to all stated constraints (e.g., language choice, performance goals, coding style). Do not ignore any requirement or best practice stated.
+- Only produce output relevant to the question or instructions. Do not add features, code, or details beyond what is explicitly asked.
+- Deliver the response in a minimal yet complete form. Avoid unnecessary verbosity and tangential remarks.
+- If the prompt requests a specific output format (e.g., a fenced code block, bullet points, JSON), follow that format exactly.
+- If a prompt includes a pre-seeded answer structure (e.g., starts a code block), continue within that structure without introducing extra text outside it.
+- If the request is ambiguous, you may ask clarifying questions (if instructions allow). Otherwise, state briefly that more information is needed.
+- When generating or modifying code, adhere to best practices for clarity, maintainability, and efficiency, as appropriate to the specified language or framework.
+- Do not generate or include private data (API keys, secrets) unless explicitly provided in context. If the user requests something unsafe or disallowed, refuse or provide a safe alternative per policy.
+</file>
+
+<file path="templates/starter/base-starter/README.md.mustache">
+# {{PROJECT_NAME}}
+
+
+<p>
+  <img src="https://img.shields.io/badge/React-19.0.0-blue?style=flat&colorA=18181B&colorB=28CF8D" alt="React Version">
+  <img src="https://img.shields.io/badge/Three.js-0.173.0-green?style=flat&colorA=18181B&colorB=28CF8D" alt="Three.js Version">
+  <img src="https://img.shields.io/badge/R3F-9.0.4-orange?style=flat&colorA=18181B&colorB=28CF8D" alt="React Three Fiber Version">
+  <img src="https://img.shields.io/badge/Vite-6.2.0-purple?style=flat&colorA=18181B&colorB=28CF8D" alt="Vite Version">
+  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat&colorA=18181B&colorB=28CF8D" alt="License">
+</p>
+
+
+{{PROJECT_NAME}} is a 3D web application built with codetie, combining the power of React Three Fiber with the latest React 19 features. Created by {{AUTHOR_NAME}}.
+
+Description
+
+{{DESCRIPTION}}
+
+Getting Started
+
+Prerequisites
+    •	Node.js 18+
+    •	npm, yarn, or pnpm
+
+Installation
+
+# Install dependencies
+npm install
+# or
+yarn install
+# or
+pnpm install
+
+# Start development server
+npm run dev
+
+Visit http://localhost:5173 to see your app in action.
+
+Agile-Lite Workflow (Optional)
+
+If you installed the agile-lite workflow, see the devnotes/ folder for guidance. The recommended process is:
+    1.	Write a simple prd.md
+    2.	Write an arch.md
+    3.	Create short story docs
+    4.	Implement with TDD in mind
+
+Project Structure
+
+{{PROJECT_NAME}}/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── canvas/
+│   │   └── dom/
+│   ├── hooks/
+│   ├── store/
+│   ├── types/
+│   ├── utils/
+│   ├── App.tsx
+│   └── main.tsx
+├── devnotes/            # optional agile-lite docs
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
+
+Resources
+    •	React Three Fiber Documentation
+    •	Drei Documentation
+    •	Three.js Documentation
+    •	React Documentation
+    •	Vite Documentation
+
+License
+
+This project is licensed under the MIT License.
+
+⸻
+
+Created with codetie - {{CURRENT_YEAR}}
+</file>
+
+<file path="CONTRIBUTE.md">
+# Contributing to codetie
+
+Thank you for your interest in contributing to codetie! This document provides guidelines and instructions to help you get started with contributing to the project.
+
+
+## Getting Started
+
+### Development Environment Setup
+
+1. **Fork the Repository**
+   
+   Start by forking the repository to your GitHub account.
+
+2. **Clone the Repository**
+
+   ```bash
+   git clone git@github.com:instructa/codetie.git
+   cd codetie
+   ```
+
+3. **Install Dependencies & Run**
+
+    ```bash
+      # Using npm
+      pnpm install
+      pnpm run dev
+    ```
+
+   The development server will start at `http://localhost:5173`.
+
+## Development Workflow
+
+1. **Create a Branch**
+
+   ```bash
+   git checkout -b feat/your-feature-name
+   ```
+
+2. **Make Your Changes**
+
+   Implement your changes.
+
+3. **Commit Your Changes**
+
+   ```bash
+   git commit -m "feat: add your feature description"
+   ```
+
+   We follow [Conventional Commits](https://www.conventionalcommits.org/) for commit messages.
+
+4. **Push to Your Fork**
+
+   ```bash
+   git push origin feat/your-feature-name
+   ```
+
+5. **Create a Pull Request**
+
+   Go to the [codetie repository](https://github.com/instructa/codetie) and create a pull request from your fork.
+
+## Pull Request Process
+
+1. Ensure your code follows the project's coding standards
+2. Update documentation if necessary
+3. Add tests for new features
+4. Make sure all tests pass
+5. Wait for code review and address any feedback
+</file>
+
+<file path="LICENSE">
+MIT License
+
+Copyright (c) Nuxt Project
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</file>
+
+<file path="package.json">
+{
+  "name": "@codetie/codetie-monorepo",
+  "private": true,
+  "version": "0.0.1",
+  "homepage": "https://codetie.ai",
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/instructa/codetie"
+  },
+  "license": "MIT",
+  "bin": {
+    "codetie-create": "./index.js"
+  },
+  "scripts": {
+    "build:packages": "pnpm -r --filter './packages/**' build",
+    "build:templates": "pnpm -r --filter './templates/**' build",
+    "build:docs": "pnpm -r --filter './docs/**' build",
+    "dev:docs": "pnpm -r --filter './docs/**' dev",
+    "lint": "eslint --cache .",
+    "typecheck": "tsc -p scripts --noEmit && pnpm -r --parallel run typecheck",
+    "build": "pnpm -r --filter='./packages/codetie' run build",
+    "publish-npm": "pnpm -r --filter='./packages/codetie' run build && tsx scripts/release.ts",
+    "link-create": "cd packages/create-codetie && pnpm link --global",
+    "llms": "npx repomix docs/codetie-docs/content --include '**/*.md' --ignore '**/1.index.md,index.md,*credits*.md,*codetie*' --output docs/codetie-docs/public/llms_full.txt"
+  },
+  "keywords": [
+    "codetie",
+    "cli",
+    "three",
+    "threejs",
+    "project-setup",
+    "cursor",
+    "cursor-ai",
+    "react-three-fiber",
+    "ai-coding",
+    "instructa"
+  ],
+  "devDependencies": {
+    "@release-it/bumper": "^6.0.1",
+    "@release-it/conventional-changelog": "^8.0.2",
+    "@vitejs/release-scripts": "^1.3.3",
+    "chalk": "^5.4.1",
+    "conventional-changelog-cli": "^5.0.0",
+    "cursor-tools": "latest",
+    "eslint": "^9.22.0",
+    "execa": "^9.5.2",
+    "globals": "^15.15.0",
+    "inquirer": "^10.2.2",
+    "lint-staged": "^15.4.3",
+    "mustache": "^4.2.0",
+    "picocolors": "^1.1.1",
+    "prompts": "^2.4.2",
+    "release-it": "^17.11.0",
+    "rimraf": "^5.0.10",
+    "semver": "^7.7.1",
+    "tslib": "^2.8.1",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.26.1",
+    "yargs": "^17.7.2"
+  },
+  "packageManager": "pnpm@10.6.2",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3"
+    ],
+    "overrides": {
+      "codetie": "workspace:*"
+    }
+  }
+}
+</file>
+
+<file path="pnpm-workspace.yaml">
+packages:
+  - 'packages/*'
+  - 'templates/*'
+  - 'docs/*'
+ignoredBuiltDependencies:
+  - better-sqlite3
+  - esbuild
+onlyBuiltDependencies:
+  - better-sqlite3
+catalog:
+  '@biomejs/biome': ^1.9.4
+  typescript: ^5.7.3
+</file>
+
+<file path="README.md">
+# codetie
+
+<p>
+  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat&colorA=18181B&colorB=28CF8D" alt="License">
+  <a href="https://github.com/instructa/codetie/stargazers"><img src="https://img.shields.io/github/stars/instructa/codetie.svg?style=flat&colorA=18181B&colorB=28CF8D" alt="Stars"></a>
+</p>
+
+**codetie** - A CLI tool for managing AI-powered IDE configurations and rules.
+
+
+**ATTENTION:** This is brand new. untested and under heavy dev! ❗❗❗
+
+
+---
+
+## Features
+
+- 🤖 **Multi-IDE Support** - Works with popular AI-powered code editors
+- 🎯 **Standardized Rules** - Consistent AI behavior across different editors
+- 🔄 **Easy Migration** - Switch between IDEs while keeping your AI configurations
+- 📦 **Pre-configured Templates** - Best practices for each supported IDE
+- 🛠️ **Customizable** - Extend and modify rules for your needs
+- 🚀 **Quick Setup** - Initialize IDE configurations with a single command
+
+## Supported IDEs
+
+- **Cursor** - Uses `.cursor/rules` for AI assistance configuration
+- **Windsurf** - Uses `.windsurfrules` for code generation settings
+- **Cline** - Custom instructions for the Cline AI assistant
+- **GitHub Copilot** - `.github/copilot-instructions.md` for personalized suggestions
+
+## Quick Start
+
+1. Initialize configuration for your preferred IDE:
+```bash
+# Use default IDE (cursor)
+npx codetie@latest init
+
+# Or specify an IDE
+npx codetie@latest init --ide <ide-name>
+
+# Available IDE options: cursor, windsurf, cline, copilot
+```
+
+2. The tool will:
+   - Create the appropriate configuration directory
+   - Add recommended AI rules and settings
+   - Preserve existing configurations (with --force option to override)
+
+## IDE-Specific Setup
+
+### Cursor
+```bash
+npx codetie@latest init --ide cursor
+```
+Creates `.cursor/rules` with optimized settings for:
+- Code style consistency
+- Project-specific conventions
+- Documentation standards
+- Testing patterns
+
+### Windsurf
+```bash
+npx codetie@latest init --ide windsurf
+```
+Creates `.windsurfrules` with:
+- Code generation preferences
+- Project structure guidelines
+- Best practices for your stack
+
+### Cline
+```bash
+npx codetie@latest init --ide cline
+```
+Sets up Cline-specific configurations for:
+- Custom AI instructions
+- Code completion preferences
+- Project-specific rules
+
+### GitHub Copilot
+```bash
+npx codetie@latest init --ide copilot
+```
+Creates `.github/copilot-instructions.md` with:
+- Repository-specific guidelines
+- Code style preferences
+- Documentation requirements
+
+## CLI Options
+
+```bash
+npx codetie@latest init [options]
+
+Options:
+  --ide                 IDE to initialize configuration for (cursor, windsurf, cline, copilot)
+                       Default: cursor
+  --force              Override existing files without prompting (default: false)
+  --help, -h           Display help for command
+```
+
+## Configuration Structure
+
+Each IDE's configuration follows its own standard format:
+
+```
+project/
+├── .cursor/           # Cursor AI configuration
+│   └── rules/
+├── .windsurfrules    # Windsurf configuration
+├── .github/          # GitHub Copilot configuration
+│   └── copilot-instructions.md
+└── ...
+```
+
+## Contributing
+
+Contributions are welcome! Feel free to:
+- Add support for new IDEs
+- Improve existing configurations
+- Share best practices
+- Report issues
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Links
+
+- X/Twitter: [@kregenrek](https://x.com/kregenrek)
+- Bluesky: [@kevinkern.dev](https://bsky.app/profile/kevinkern.dev)
+
+## Related Projects
+
+* [AI Prompts](https://github.com/instructa/ai-prompts) - Curated AI Prompts for various AI-powered IDEs
+* [codefetch](https://github.com/regenrek/codefetch) - Turn code into Markdown for LLMs
+* [aidex](https://github.com/regenrek/aidex) - CLI tool for AI language model information
+</file>
+
+</files>
