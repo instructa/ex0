@@ -1,7 +1,7 @@
 {
   "name": "codetie",
-  "version": "0.0.1",
-  "description": "A CLI for building interactive 3D web apps with optional agile-lite workflow management.",
+  "version": "1.0.10",
+  "description": "A CLI for to quickstart apps with Cursor and agile workflow management",
   "type": "module",
   "main": "dist/index.mjs",
   "bin": {
@@ -24,12 +24,13 @@
     "release:alpha": "npm publish --tag alpha"
   },
   "keywords": [
-    "3d",
     "cli",
-    "react-three-fiber",
     "vite",
     "ai",
-    "agile-lite",
+    "cursor",
+    "ai",
+    "starter",
+    "starter-kit",
     "workflow"
   ],
   "author": "Kevin Kern",

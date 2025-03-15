@@ -1,5 +1,5 @@
 ---
-description: Viber3D Coding Guidelines
+description: Base Coding Guidelines
 globs: *,**/*
 alwaysApply: true
 ---
