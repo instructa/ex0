@@ -19,13 +19,13 @@ npx codetie@latest init
 Initialize IDE configuration:
 
 ```bash
-npx codetie init --ide cursor
+npx codetie@latest init --ide cursor
 ```
 
 Initialize a new project:
 
 ```bash
-npx codetie init myapp
+npx codetie@latest init myapp
 ```
 
 Then optionally install the agile-lite workflow:

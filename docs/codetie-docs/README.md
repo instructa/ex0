@@ -9,12 +9,9 @@ Welcome to the **codetie** documentation project! This directory provides a samp
 ## Getting Started
 
 1. **Install** codetie:
-   ```bash
-   npm install -g codetie
-   ```
    or just use:
    ```bash
-   npx codetie init
+   npx codetie@latest init
    ```
 
 2. **Open** the `content/` folder. We have a few markdown files showing how a docs site can be structured.

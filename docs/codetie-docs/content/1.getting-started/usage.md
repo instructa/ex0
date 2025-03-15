@@ -9,19 +9,19 @@ codetie offers a simple CLI approach. Whether you’re working with Cursor, Wind
 
 - **Initialize**:
 ```bash
-npx codetie init
+npx codetie@latest init
 ```
 Creates or updates configuration for your default IDE (`cursor`) unless otherwise specified.
 
 - **Specify IDE**:
 ```bash
-npx codetie init --ide copilot
+npx codetie@latest init --ide copilot
 ```
 This sets up `.github/copilot-instructions.md` with recommended rules for Copilot.
 
 - **Force Overwrite**:
 ```bash
-npx codetie init --force
+npx codetie@latest init --force
 ```
 Overrides existing configuration files without prompting.
 
@@ -29,7 +29,7 @@ Overrides existing configuration files without prompting.
 
 1. **Init**:
    ```bash
-   npx codetie init --ide cursor
+   npx codetie@latest init --ide cursor
    ```
    This creates `.cursor/rules/` along with recommended codetie AI guidelines.
 
@@ -44,7 +44,7 @@ Overrides existing configuration files without prompting.
 
 4. **Switch IDE**:
    ```bash
-   npx codetie init --ide windsurf
+   npx codetie@latest init --ide windsurf
    ```
    Now you have `.windsurfrules` with the same best practices, ensuring consistent AI behavior across both editors.
 

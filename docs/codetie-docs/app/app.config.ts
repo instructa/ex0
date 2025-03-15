@@ -1,7 +1,7 @@
 export default defineAppConfig({
   ui: {
-    primary: 'green',
-    gray: 'slate',
+    primary: 'cyan',
+    gray: 'zinc',
     footer: {
       bottom: {
         left: 'text-sm text-gray-500 dark:text-gray-400',
@@ -22,9 +22,9 @@ export default defineAppConfig({
     search: true,
     colorMode: true,
     links: [{
-      icon: 'i-simple-icons-github',
-      to: 'https://github.com/instructa/codetie',
-      target: '_blank',
+      'icon': 'i-simple-icons-github',
+      'to': 'https://github.com/instructa/codetie',
+      'target': '_blank',
       'aria-label': 'codetie on GitHub'
     }]
   },
@@ -32,9 +32,9 @@ export default defineAppConfig({
     credits: 'Copyright © 2023',
     colorMode: false,
     links: [{
-      icon: 'i-simple-icons-github',
-      to: 'https://github.com/instructa/codetie',
-      target: '_blank',
+      'icon': 'i-simple-icons-github',
+      'to': 'https://github.com/instructa/codetie',
+      'target': '_blank',
       'aria-label': 'codetie on GitHub'
     }]
   },

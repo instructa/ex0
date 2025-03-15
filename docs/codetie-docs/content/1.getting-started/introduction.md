@@ -9,7 +9,7 @@ The goal of this documentation is to show you how to use codetie effectively, en
 
 ## Features
 
-- Simple CLI usage via `npx codetie init` or `npx codetie create`.
+- Simple CLI usage via `npx codetie@latest init` or `npx codetie create`.
 - AI rules easily shared across Cursor, Windsurf, Cline, and GitHub Copilot.
 - Customizable instructions to suit project-specific demands.
 - Easy integration into existing projects.

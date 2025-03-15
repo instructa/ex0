@@ -23,7 +23,7 @@ hero:
       target: "_blank"
   code: |
     ```bash [Terminal]
-    npx codetie init
+    npx codetie@latest init
     ```
 features:
   title: "All-in-one docs template"
