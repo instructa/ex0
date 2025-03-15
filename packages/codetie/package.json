@@ -1,0 +1,51 @@
+{
+  "name": "codetie",
+  "version": "0.0.2",
+  "description": "A CLI for building interactive 3D web apps with optional agile-lite workflow management.",
+  "type": "module",
+  "main": "dist/index.mjs",
+  "bin": {
+    "codetie": "index.js"
+  },
+  "files": [
+    "dist",
+    "index.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/instructa/codetie"
+  },
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "3d",
+    "cli",
+    "react-three-fiber",
+    "vite",
+    "ai",
+    "agile-lite",
+    "workflow"
+  ],
+  "author": "Kevin Kern",
+  "license": "MIT",
+  "dependencies": {
+    "citty": "^0.1.5",
+    "consola": "^3.2.3",
+    "fs-extra": "^11.2.0",
+    "giget": "^2.0.0",
+    "pathe": "^1.1.1",
+    "scule": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.4.2",
+    "typescript": "^5.3.3",
+    "unbuild": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
