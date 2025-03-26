@@ -1,67 +1,80 @@
-# Contributing to codetie
+# Contributing to ex0
 
-Thank you for your interest in contributing to codetie! This document provides guidelines and instructions to help you get started with contributing to the project.
+Thank you for your interest in contributing to ex0! This document provides guidelines and instructions to help you get started with contributing to the project.
 
+## Development Setup
 
-## Getting Started
+### Prerequisites
 
-### Development Environment Setup
+- Node.js 18.x or higher
+- pnpm 10.x or higher
 
-1. **Fork the Repository**
-   
-   Start by forking the repository to your GitHub account.
+### Setting Up the Local Environment
 
-2. **Clone the Repository**
+1. Clone the repository:
 
-   ```bash
-   git clone git@github.com:instructa/codetie.git
-   cd codetie
-   ```
+```bash
+git clone git@github.com:instructa/ex0.git
+cd ex0
+```
 
-3. **Install Dependencies & Run**
+2. Install dependencies:
 
-    ```bash
-      # Using npm
-      pnpm install
-      pnpm run dev
-    ```
+```bash
+pnpm install
+```
 
-   The development server will start at `http://localhost:5173`.
+3. Build the packages:
 
-## Development Workflow
+```bash
+pnpm run build:packages
+```
 
-1. **Create a Branch**
+## Development Process
 
-   ```bash
-   git checkout -b feat/your-feature-name
-   ```
+### Creating a New Feature
 
-2. **Make Your Changes**
+1. Create a new branch for your feature:
 
-   Implement your changes.
+```bash
+git checkout -b feature/your-feature-name
+```
 
-3. **Commit Your Changes**
+2. Make your changes and commit them:
 
-   ```bash
-   git commit -m "feat: add your feature description"
-   ```
+```bash
+git add .
+git commit -m "feat: add your feature"
+```
 
-   We follow [Conventional Commits](https://www.conventionalcommits.org/) for commit messages.
+3. Push your branch to GitHub:
 
-4. **Push to Your Fork**
+```bash
+git push origin feature/your-feature-name
+```
 
-   ```bash
-   git push origin feat/your-feature-name
-   ```
+### Submitting a Pull Request
 
-5. **Create a Pull Request**
+Go to the [ex0 repository](https://github.com/instructa/ex0) and create a pull request from your fork.
 
-   Go to the [codetie repository](https://github.com/instructa/codetie) and create a pull request from your fork.
+## Code Style and Guidelines
 
-## Pull Request Process
+- Follow the existing code style and naming conventions.
+- Write clear, concise commit messages that follow the [Conventional Commits](https://www.conventionalcommits.org/) specification.
+- Add tests for your changes when applicable.
+- Update documentation as needed.
 
-1. Ensure your code follows the project's coding standards
-2. Update documentation if necessary
-3. Add tests for new features
-4. Make sure all tests pass
-5. Wait for code review and address any feedback
+## Release Process
+
+The project follows [Semantic Versioning](https://semver.org/). When a new release is ready, maintainers will:
+
+1. Update the version number in package.json.
+2. Create a changelog entry.
+3. Tag the release in Git.
+4. Publish to npm.
+
+## Issues and Discussions
+
+Feel free to open issues for bugs, feature requests, or questions. For complex discussions, start a discussion in the repository's Discussions section.
+
+Thank you for contributing!

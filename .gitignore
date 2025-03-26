@@ -103,7 +103,7 @@ dist
 .idea
 .env
 .data
-packages/create-codetie/debug.log
+packages/create-ex0/debug.log
 
 
 .hidden

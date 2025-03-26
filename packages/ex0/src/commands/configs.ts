@@ -12,11 +12,11 @@ type IDEOption = typeof IDE_OPTIONS[number]
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const DEFAULT_REGISTRY = 'https://raw.githubusercontent.com/instructa/codetie/main/templates'
+const DEFAULT_REGISTRY = 'https://raw.githubusercontent.com/instructa/ex0/main/templates'
 
 export default defineCommand({
   meta: {
-    name: 'init',
+    name: 'configs',
     description: 'Initialize IDE-specific configuration files',
   },
   args: {
@@ -30,6 +30,10 @@ export default defineCommand({
       type: 'boolean',
       description: 'Override existing files without prompting',
       default: false,
+    },
+    cwd: {
+      type: 'string',
+      description: 'Working directory',
     },
   },
   async run(ctx) {
@@ -45,16 +49,16 @@ export default defineCommand({
       }
 
       // Create IDE directory (e.g., .cursor)
-      const targetDir = resolve(process.cwd(), `.${selectedIDE}`)
+      const targetDir = resolve(ctx.args.cwd || process.cwd(), `.${selectedIDE}`)
       consola.info(`Creating configuration directory: ${targetDir}`)
       
       try {
         // Download template from GitHub
-        const templatePath = `codetie-init/${selectedIDE}`
+        const templatePath = `ex0-init/${selectedIDE}`
         consola.info(`Downloading template: ${templatePath}...`)
         
         try {
-          await downloadTemplate(`gh:instructa/codetie/templates/${templatePath}`, {
+          await downloadTemplate(`gh:instructa/ex0/templates/${templatePath}`, {
             dir: targetDir,
             force: ctx.args.force
           })

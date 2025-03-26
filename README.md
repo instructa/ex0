@@ -1,126 +1,114 @@
-# codetie
+# ex0
 
-<p>
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat&colorA=18181B&colorB=28CF8D" alt="License">
-  <a href="https://github.com/instructa/codetie/stargazers"><img src="https://img.shields.io/github/stars/instructa/codetie.svg?style=flat&colorA=18181B&colorB=28CF8D" alt="Stars"></a>
+<p align="center">
+<a href="https://github.com/instructa/ex0/stargazers"><img src="https://img.shields.io/github/stars/instructa/ex0.svg?style=flat&colorA=18181B&colorB=28CF8D" alt="Stars"></a>
 </p>
 
-**codetie** - A CLI tool for managing AI-powered IDE configurations and rules.
+**ex0** - A CLI tool for managing AI-powered IDE configurations and rules.
 
+<table>
+<tr>
+<td width="500px" valign="top">
 
-**ATTENTION:** This is brand new. untested and under heavy dev! ❗❗❗
+**Quick Links**
 
+- [Installation](#installation)
+- [Usage](#usage)
+- [Supported IDEs](#supported-ides)
+- [Commands](#commands)
+- [Configuration](#configuration)
+- [Contributing](#contributing)
 
----
+</td>
+<td width="500px" valign="top">
 
-## Features
+**Supported IDEs**
 
-- 🤖 **Multi-IDE Support** - Works with popular AI-powered code editors
-- 🎯 **Standardized Rules** - Consistent AI behavior across different editors
-- 🔄 **Easy Migration** - Switch between IDEs while keeping your AI configurations
-- 📦 **Pre-configured Templates** - Best practices for each supported IDE
-- 🛠️ **Customizable** - Extend and modify rules for your needs
-- 🚀 **Quick Setup** - Initialize IDE configurations with a single command
+- [Cursor](#cursor)
+- [Windsurf](#windsurf)
+- [Cline](#cline)
+- [GitHub Copilot](#github-copilot)
 
-## Supported IDEs
+</td>
+</tr>
+</table>
 
-- **Cursor** - Uses `.cursor/rules` for AI assistance configuration
-- **Windsurf** - Uses `.windsurfrules` for code generation settings
-- **Cline** - Custom instructions for the Cline AI assistant
-- **GitHub Copilot** - `.github/copilot-instructions.md` for personalized suggestions
+## Installation
 
-## Quick Start
+You can use ex0 without installing it by using npx:
 
-1. Initialize configuration for your preferred IDE:
 ```bash
-# Use default IDE (cursor)
-npx codetie@latest init
-
-# Or specify an IDE
-npx codetie@latest init --ide <ide-name>
-
-# Available IDE options: cursor, windsurf, cline, copilot
+npx ex0@latest init
 ```
 
-2. The tool will:
-   - Create the appropriate configuration directory
-   - Add recommended AI rules and settings
-   - Preserve existing configurations (with --force option to override)
+Or you can install it globally:
 
-## IDE-Specific Setup
+```bash
+npm install -g ex0
+```
+
+## Usage
+
+Create a new project with standard IDEs configuration:
+
+```bash
+npx ex0@latest init --ide <ide-name>
+```
 
 ### Cursor
+
+Initialize a project with Cursor AI configuration:
+
 ```bash
-npx codetie@latest init --ide cursor
+npx ex0@latest init --ide cursor
 ```
-Creates `.cursor/rules` with optimized settings for:
-- Code style consistency
-- Project-specific conventions
-- Documentation standards
-- Testing patterns
+
+This will create a `.cursor` directory in your project with configuration files for Cursor AI.
 
 ### Windsurf
+
+Initialize a project with Windsurf configuration:
+
 ```bash
-npx codetie@latest init --ide windsurf
+npx ex0@latest init --ide windsurf
 ```
-Creates `.windsurfrules` with:
-- Code generation preferences
-- Project structure guidelines
-- Best practices for your stack
+
+This will create a `.windsurf` directory in your project.
 
 ### Cline
+
+Initialize a project with Cline configuration:
+
 ```bash
-npx codetie@latest init --ide cline
+npx ex0@latest init --ide cline
 ```
-Sets up Cline-specific configurations for:
-- Custom AI instructions
-- Code completion preferences
-- Project-specific rules
+
+This will create a `.cline` directory in your project.
 
 ### GitHub Copilot
+
+Initialize a project with GitHub Copilot configuration:
+
 ```bash
-npx codetie@latest init --ide copilot
+npx ex0@latest init --ide copilot
 ```
-Creates `.github/copilot-instructions.md` with:
-- Repository-specific guidelines
-- Code style preferences
-- Documentation requirements
 
-## CLI Options
+This will create a `.github/.copilot` directory in your project.
+
+## Commands
 
 ```bash
-npx codetie@latest init [options]
+npx ex0@latest init [options]
+```
 
 Options:
-  --ide                 IDE to initialize configuration for (cursor, windsurf, cline, copilot)
-                       Default: cursor
-  --force              Override existing files without prompting (default: false)
-  --help, -h           Display help for command
-```
-
-## Configuration Structure
-
-Each IDE's configuration follows its own standard format:
-
-```
-project/
-├── .cursor/           # Cursor AI configuration
-│   └── rules/
-├── .windsurfrules    # Windsurf configuration
-├── .github/          # GitHub Copilot configuration
-│   └── copilot-instructions.md
-└── ...
-```
+- `--ide <name>`: Specify the IDE to configure (cursor, windsurf, cline, copilot)
+- `--defaults`: Use default options without prompting
+- `--yes`: Skip prompts, use defaults
 
 ## Contributing
 
-Contributions are welcome! Feel free to:
-- Add support for new IDEs
-- Improve existing configurations
-- Share best practices
-- Report issues
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+Please see [CONTRIBUTE.md](./CONTRIBUTE.md) for details on how to contribute to this project.
 
 ## License
 

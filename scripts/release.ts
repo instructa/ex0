@@ -3,11 +3,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 // List of packages to publish
-const packages = ['codetie'];
+const packages = ['ex0'];
 
 // List of all packages that need version bumping (including those not published)
 // @TODO
-const allPackages = ['codetie', 'codetie-starter'];
+const allPackages = ['ex0', 'ex0-starter'];
 
 function run(command: string, cwd: string) {
   console.log(`Executing: ${command} in ${cwd}`);

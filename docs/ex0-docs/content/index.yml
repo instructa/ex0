@@ -1,13 +1,13 @@
-title: "codetie - Documentation"
-description: codetie is a CLI that centralizes AI-assistant rules across multiple IDEs, ensuring consistent coding standards and project guidelines.
+title: "ex0 - Documentation"
+description: ex0 is a CLI that centralizes AI-assistant rules across multiple IDEs, ensuring consistent coding standards and project guidelines.
 navigation: false
 hero:
   title: "Build your AI config docs in seconds"
-  description: "Use codetie to unify AI rules across your project."
+  description: "Use ex0 to unify AI rules across your project."
   orientation: horizontal
   headline:
-    label: "Made with codetie"
-    to: https://github.com/instructa/codetie
+    label: "Made with ex0"
+    to: https://github.com/instructa/ex0
     icon: i-heroicons-arrow-top-right-on-square-20-solid
   links:
     - label: "Get started"
@@ -15,54 +15,54 @@ hero:
       trailing: true
       to: "/getting-started"
       size: lg
-    - label: "codetie repository"
+    - label: "ex0 repository"
       icon: i-simple-icons-github
       size: lg
       color: gray
-      to: https://github.com/instructa/codetie
+      to: https://github.com/instructa/ex0
       target: "_blank"
   code: |
     ```bash [Terminal]
-    npx codetie@latest init
+    npx ex0@latest init
     ```
 features:
   title: "All-in-one docs template"
   links:
-    - label: "Explore codetie"
+    - label: "Explore ex0"
       icon: "i-simple-icons-github"
       trailingIcon: "i-heroicons-arrow-right-20-solid"
       color: "gray"
-      to: "https://github.com/instructa/codetie"
+      to: "https://github.com/instructa/ex0"
       target: "_blank"
       size: lg
   items:
     - title: "Single CLI"
-      description: "Use codetie to manage AI config for multiple IDEs."
+      description: "Use ex0 to manage AI config for multiple IDEs."
       icon: "i-heroicons-terminal-20-solid"
-      to: "https://github.com/instructa/codetie"
+      to: "https://github.com/instructa/ex0"
       target: "_blank"
     - title: "Markdown"
       description: "Write your docs quickly in .md files."
       icon: "i-simple-icons-markdown"
-      to: "https://github.com/instructa/codetie"
+      to: "https://github.com/instructa/ex0"
       target: "_blank"
     - title: "Modular"
       description: "Easily add or remove rules per IDE."
       icon: "i-heroicons-sparkles-20-solid"
-      to: "https://github.com/instructa/codetie"
+      to: "https://github.com/instructa/ex0"
       target: "_blank"
     - title: "TypeScript"
       description: "A fully typed development experience for your CLI usage."
       icon: "i-simple-icons-typescript"
-      to: "https://github.com/instructa/codetie"
+      to: "https://github.com/instructa/ex0"
       target: "_blank"
     - title: "Extendable"
       description: "Tweak or replace existing rules to match your preferences."
       icon: "i-simple-icons-codesandbox"
-      to: "https://github.com/instructa/codetie"
+      to: "https://github.com/instructa/ex0"
       target: "_blank"
     - title: "Search"
       description: "Full-text search can be integrated to quickly locate docs."
       icon: "i-heroicons-magnifying-glass-20-solid"
-      to: "https://github.com/instructa/codetie"
+      to: "https://github.com/instructa/ex0"
       target: "_blank"

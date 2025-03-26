@@ -11,14 +11,14 @@ import { fileURLToPath } from 'node:url'
 import { dirname } from 'pathe'
 import { downloadTemplate } from 'giget'
 import { cwdArgs, logLevelArgs } from './_shared'
-import initCommandDef from './init'
+import configsCommandDef from './configs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 const templateDir = resolve(__dirname, '../../../templates')
 
 const DEFAULT_TEMPLATE = 'starter/base-starter'
-const DEFAULT_REGISTRY = 'https://raw.githubusercontent.com/instructa/codetie/main/templates'
+const DEFAULT_REGISTRY = 'https://raw.githubusercontent.com/instructa/ex0/main/templates'
 
 const renameFiles: Record<string, string | undefined> = {
   _gitignore: '.gitignore',
@@ -32,10 +32,10 @@ const renameFiles: Record<string, string | undefined> = {
 const packageManagerOptions = ['npm', 'yarn', 'pnpm'] as const
 type PackageManagerName = typeof packageManagerOptions[number]
 
-const initCommand = defineCommand({
+export default defineCommand({
   meta: {
     name: 'init',
-    description: 'Initialize a fresh codetie project',
+    description: 'Initialize a fresh ex0 project',
   },
   args: {
     ...cwdArgs,
@@ -118,15 +118,15 @@ const initCommand = defineCommand({
       
       // If using defaults, use default project name without prompting
       if (!projectName && ctx.args.defaults) {
-        projectName = 'my-codetie-project'
+        projectName = 'my-ex0-project'
       } else if (!projectName && !ctx.args.yes) {
-        projectName = await consola.prompt('Where would you like to create your codetie project?', {
-          placeholder: 'my-codetie-game',
+        projectName = await consola.prompt('Where would you like to create your ex0 project?', {
+          placeholder: 'my-ex0-project',
           type: 'text',
-          default: 'my-codetie-game',
+          default: 'my-ex0-project',
         })
       } else if (!projectName) {
-        projectName = 'my-codetie-game'
+        projectName = 'my-ex0-project'
       }
 
       if (!projectName) {
@@ -183,7 +183,7 @@ const initCommand = defineCommand({
         
         // If it's the default template or a known template name
         if (templateName === DEFAULT_TEMPLATE || !templateName.includes('/')) {
-          templateUrl = `gh:instructa/codetie/templates/${templateName}`
+          templateUrl = `gh:instructa/ex0/templates/${templateName}`
         }
 
         await downloadTemplate(templateUrl, {
@@ -197,8 +197,8 @@ const initCommand = defineCommand({
       }
 
       // Get project details
-      let description = `A codetie game called ${projectName}`
-      let authorName = getGitUser() || 'codetie Developer'
+      let description = `An ex0 project called ${projectName}`
+      let authorName = getGitUser() || 'ex0 Developer'
       
       if (!ctx.args.defaults && !ctx.args.yes) {
         description = await consola.prompt('Enter project description:', {
@@ -229,16 +229,17 @@ const initCommand = defineCommand({
       // After template is downloaded and configured, run the init command
       consola.info('Initializing IDE configuration...')
       try {
-        if (initCommandDef?.run) {
-          await initCommandDef.run({
+        if (configsCommandDef?.run) {
+          await configsCommandDef.run({
             args: {
               ide: 'cursor',
               force: ctx.args.force,
-              _: []
+              _: [],
+              cwd: root
             },
             data: {},
             rawArgs: [],
-            cmd: initCommandDef
+            cmd: configsCommandDef
           })
         }
       } catch (error) {
@@ -325,7 +326,7 @@ const initCommand = defineCommand({
       // Display next steps
       const relativeRoot = relative(process.cwd(), root) || '.'
       consola.box(`
-codetie project created successfully! 🎉
+ex0 project created successfully! 🎉
 
 Project: ${projectName}
 Template: ${templateName}
@@ -336,7 +337,7 @@ ${relativeRoot !== '.' ? `1. cd ${relativeRoot}` : ''}
 ${relativeRoot !== '.' ? '2' : '1'}. npm run dev (or yarn dev, pnpm dev)
 ${relativeRoot !== '.' ? '3' : '2'}. Open your browser at http://localhost:5173
 
-Happy game development! 🚀
+Happy development! 🚀
       `)
     } catch (error) {
       consola.error(error)
@@ -406,15 +407,3 @@ function updatePackageJson(
     fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2))
   }
 }
-
-// Main command with subcommands
-const main = defineCommand({
-  meta: {
-    name: 'codetie',
-    description: 'codetie CLI tools',
-  },
-  subCommands: {
-    init: initCommand,
-  }
-})
-runMain(main)

@@ -10,8 +10,8 @@ export default defineAppConfig({
     }
   },
   seo: {
-    // Changed from 'Nuxt UI Pro - Docs template' to 'codetie - Docs'
-    siteName: 'codetie - Docs'
+    // Changed from 'Nuxt UI Pro - Docs template' to 'ex0 - Docs'
+    siteName: 'ex0 - Docs'
   },
   header: {
     logo: {
@@ -23,9 +23,9 @@ export default defineAppConfig({
     colorMode: true,
     links: [{
       'icon': 'i-simple-icons-github',
-      'to': 'https://github.com/instructa/codetie',
+      'to': 'https://github.com/instructa/ex0',
       'target': '_blank',
-      'aria-label': 'codetie on GitHub'
+      'aria-label': 'ex0 on GitHub'
     }]
   },
   footer: {
@@ -33,31 +33,31 @@ export default defineAppConfig({
     colorMode: false,
     links: [{
       'icon': 'i-simple-icons-github',
-      'to': 'https://github.com/instructa/codetie',
+      'to': 'https://github.com/instructa/ex0',
       'target': '_blank',
-      'aria-label': 'codetie on GitHub'
+      'aria-label': 'ex0 on GitHub'
     }]
   },
   toc: {
     title: 'Table of Contents',
     bottom: {
       title: 'Community',
-      // Changed the edit link to codetie
-      edit: 'https://github.com/instructa/codetie/edit/main/content',
+      // Changed the edit link to ex0
+      edit: 'https://github.com/instructa/ex0/edit/main/content',
       links: [{
         icon: 'i-heroicons-star',
         label: 'Star on GitHub',
-        to: 'https://github.com/instructa/codetie',
+        to: 'https://github.com/instructa/ex0',
         target: '_blank'
       }, {
         icon: 'i-heroicons-book-open',
-        label: 'codetie docs',
-        to: 'https://github.com/instructa/codetie',
+        label: 'ex0 docs',
+        to: 'https://github.com/instructa/ex0',
         target: '_blank'
       }, {
         icon: 'i-simple-icons-nuxtdotjs',
         label: 'Contribute or fork',
-        to: 'https://github.com/instructa/codetie',
+        to: 'https://github.com/instructa/ex0',
         target: '_blank'
       }]
     }

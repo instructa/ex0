@@ -1,11 +1,11 @@
 {
-  "name": "codetie",
-  "version": "1.0.10",
+  "name": "ex0",
+  "version": "0.0.1",
   "description": "A CLI for to quickstart apps with Cursor and agile workflow management",
   "type": "module",
   "main": "dist/index.mjs",
   "bin": {
-    "codetie": "index.js"
+    "ex0": "index.js"
   },
   "files": [
     "dist",
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/instructa/codetie"
+    "url": "git+https://github.com/instructa/ex0"
   },
   "scripts": {
     "build": "unbuild",

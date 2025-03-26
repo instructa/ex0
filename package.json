@@ -1,18 +1,18 @@
 {
-  "name": "@codetie/codetie-monorepo",
+  "name": "@ex0/ex0-monorepo",
   "private": true,
   "version": "0.0.1",
-  "homepage": "https://codetie.ai",
+  "homepage": "https://ex0.dev",
   "engines": {
     "node": "^18.0.0 || >=20.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/instructa/codetie"
+    "url": "git+https://github.com/instructa/ex0"
   },
   "license": "MIT",
   "bin": {
-    "codetie-create": "./index.js"
+    "ex0-create": "./index.js"
   },
   "scripts": {
     "build:packages": "pnpm -r --filter './packages/**' build",
@@ -21,13 +21,13 @@
     "dev:docs": "pnpm -r --filter './docs/**' dev",
     "lint": "eslint --cache .",
     "typecheck": "tsc -p scripts --noEmit && pnpm -r --parallel run typecheck",
-    "build": "pnpm -r --filter='./packages/codetie' run build",
-    "publish-npm": "pnpm -r --filter='./packages/codetie' run build && tsx scripts/release.ts",
-    "link-create": "cd packages/create-codetie && pnpm link --global",
-    "llms": "npx repomix docs/codetie-docs/content --include '**/*.md' --ignore '**/1.index.md,index.md,*credits*.md,*codetie*' --output docs/codetie-docs/public/llms_full.txt"
+    "build": "pnpm -r --filter='./packages/ex0' run build",
+    "publish-npm": "pnpm -r --filter='./packages/ex0' run build && tsx scripts/release.ts",
+    "link-create": "cd packages/create-ex0 && pnpm link --global",
+    "llms": "npx repomix docs/ex0-docs/content --include '**/*.md' --ignore '**/1.index.md,index.md,*credits*.md,*ex0*' --output docs/ex0-docs/public/llms_full.txt"
   },
   "keywords": [
-    "codetie",
+    "ex0",
     "cli",
     "three",
     "threejs",
@@ -68,7 +68,7 @@
       "better-sqlite3"
     ],
     "overrides": {
-      "codetie": "workspace:*"
+      "ex0": "workspace:*"
     }
   }
 }
